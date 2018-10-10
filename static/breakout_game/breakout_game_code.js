@@ -21,7 +21,7 @@ function preload() {
         '/static/assets/audio/bodenstaendig_2000_in_rock_4bit.ogg']
     );
     game.load.audio('weaponAudio', ['/static/assets/audio/SoundEffects/blaster.mp3',]);
-    game.load.audio('brickAudio', ['/static/assets/audio/SoundEffects/squit.ogg',]);
+    game.load.audio('brickAudio', ['/static/assets/audio/SoundEffects/squit.ogg', '/static/assets/audio/SoundEffects/squit.mp3']);
 
 
 }

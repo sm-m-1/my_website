@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block base_head %}
-    <script src="{% static "fire_gun/phaser.js" %}"></script>
+    <script src="/static/breakout_game/phaser.js"></script>
 
 {% endblock base_head %}
 
@@ -16,7 +16,6 @@
     <div class="my-5" id="breakout_game"></div>
   </div>
 
-{#    <img src="/static/fire_gun/dlist_v_rvector.png" alt="image_test">#}
-    <script type="text/javascript" src="/static/fire_gun/breakout_game_code.js"></script>
+  <script type="text/javascript" src="/static/breakout_game/breakout_game_code.js"></script>
 
 {% endblock content %}

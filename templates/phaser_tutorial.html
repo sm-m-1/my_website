@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block base_head %}
+    <script src="{% static "fire_gun/phaser.js" %}"></script>
+
+{% endblock base_head %}
+
+{% block content %}
+    <h1 class="text-center">{{ title }}</h1>
+    <h1 class="text-center">{{ content }}</h1>
+{#    <img src="/static/fire_gun/dlist_v_rvector.png" alt="image_test">#}
+    <script src="{% static "fire_gun/phaser_tutorial.js" %}"></script>
+
+
+{% endblock content %}

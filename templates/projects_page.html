@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block base_head %}
+
+{% endblock base_head %}
+
+{% block content %}
+  <div class="container">
+    <div class="row">
+      <div class="card mx-auto my-5" style="width: 30rem;">
+        <img class="card-img-top" src="/static/site_images/breakout_game.png" alt="breakout_game_image">
+        <div class="card-body">
+          <h5 class="card-title">Breakout Game</h5>
+          <p class="card-text">This Breakout game is created in JavaScript. I am currently working on it, but you are welcome to play what I have so far.</p>
+          <a href="{% url 'breakout_game' %}" class="btn btn-primary">Play the game!</a>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="card mx-auto my-5" style="width: 30rem;">
+        <img class="card-img-top" src="/static/site_images/placeholder.png" alt="breakout_game_image">
+        <div class="card-body">
+          <h5 class="card-title">CU Food Reviews ( in progress )</h5>
+          <p class="card-text">
+            This is a web application where Cornell students can view list of campus dining locations and their menus list.
+            Students can leave reviews on each food item and upload images of their meals. I am currently working on it.
+            The idea is to ingest locations and menu list from Cornell API, and add the review and photo sharing functionality in my
+            web application.
+          </p>
+          <a href="#" class="btn btn-primary">Visit the web app!</a>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="card mx-auto my-5" style="width: 30rem;">
+        <img class="card-img-top" src="/static/site_images/placeholder.png" alt="breakout_game_image">
+        <div class="card-body">
+          <h5 class="card-title">My Essay Stats ( in progress )</h5>
+          <p class="card-text">
+            This is a web application where students can enter their essay and gain analytical information about their essay.
+          </p>
+          <a href="#" class="btn btn-primary">Visit the web app!</a>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="card mx-auto my-5" style="width: 30rem;">
+        <img class="card-img-top" src="/static/site_images/placeholder.png" alt="breakout_game_image">
+        <div class="card-body">
+          <h5 class="card-title">Snake Game ( in progress )</h5>
+          <p class="card-text">
+            The classic Snake game recreated in JavaScript.
+          </p>
+          <a href="#" class="btn btn-primary">Visit the web app!</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+{% endblock content %}

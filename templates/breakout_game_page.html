@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block base_head %}
+    <script src="{% static "fire_gun/phaser.js" %}"></script>
+
+{% endblock base_head %}
+
+{% block content %}
+  <div class="container">
+    <div class="my-5">
+      <h2>Breakout in Space!</h2>
+      <h4>Controls</h4>
+      <p>Move your mouse to control the paddle. Press Space to fire bullets at the bricks!</p>
+    </div>
+    <div class="my-5" id="breakout_game"></div>
+  </div>
+
+{#    <img src="/static/fire_gun/dlist_v_rvector.png" alt="image_test">#}
+    <script type="text/javascript" src="/static/fire_gun/breakout_game_code.js"></script>
+
+{% endblock content %}

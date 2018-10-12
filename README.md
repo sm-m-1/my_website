@@ -1,3 +1,3 @@
 # my_website
 
-I will be creating separate repositories for my personal projects.
+This is the Django code for my website.

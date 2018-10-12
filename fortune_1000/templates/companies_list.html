@@ -59,9 +59,9 @@
             </thead>
             <tbody>
               <tr>
-                <td>$ {{ company.revenue | get_billion | intword }}</td>
-                <td>$ {{ company.profits | get_billion | intword}}</td>
-                <td>$ {{ company.assets | get_billion | intword }}</td>
+                <td>$ {{ company.revenue | multiply_by_1m | intword }}</td>
+                <td>$ {{ company.profits | multiply_by_1k | intword }}</td>
+                <td>$ {{ company.assets | multiply_by_1m | intword }}</td>
                 <td>{{ company.stock_ticker }}</td>
                 <td>$(coming soon)</td>
                 <td>{{ company.city }} / {{ company.state }}</td>

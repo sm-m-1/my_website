@@ -12,5 +12,9 @@ class CompanyListView(ListView):
         print("context:", context)
         return context
 
+    def get_queryset(self):
+        queryset = Company.objects.get_queryset().order_by('rank')
+        # return super(BookList, self).get_queryset()
+        return queryset[:300]
 
 

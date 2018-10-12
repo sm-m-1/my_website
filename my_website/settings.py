@@ -84,13 +84,16 @@ WSGI_APPLICATION = 'my_website.wsgi.application'
 #     }
 # }
 #
+
+from .heroku_db_cred import heroku_db
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'postgres',
-        'USER': 'postgres',
-        'PASSWORD': '',
-        'HOST': 'localhost',
+        'NAME': heroku_db['NAME'],
+        'USER': heroku_db['USER'],
+        'PASSWORD': heroku_db['PASSWORD'],
+        'HOST': heroku_db[''],
         'PORT': '5432',
     }
 }

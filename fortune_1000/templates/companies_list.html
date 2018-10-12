@@ -12,15 +12,27 @@
     <div class="card my-2">
       <h5 class="card-title mx-2 my-2"> This is a list of 2018 Fortune 1000 companies.</h5>
       <p class="card-text mx-2 my-2">
-        The data has been extracted from a csv file that contains company name, rank, revenues, profit.
-        You can see the csv dataset at <a href="https://www.kaggle.com/Eruditepanda/fortune-1000-2018/version/3">Kaggle</a>
+        The initial data has been extracted from a Kaggle dataset.
+        You can see the csv data at <a href="https://www.kaggle.com/Eruditepanda/fortune-1000-2018/version/3">Kaggle</a>
       </p>
       <p class="card-text mx-2 my-2">
         The goal of this project is to learn and gain practice how to load data into a Django model and show it
-        in a list view. I also plan on integrating this page of information with IEX API which will provides
-        stock price data for given companies. I will also try to connect to some image API to get a picture
-        of each company's logo.
+        in a list view. Next step is to integrate this page of information with IEX API which will provides
+        stock price data for given companies.
+        The goals of this project described below:
       </p>
+      <ul>
+        <li> Load data into Django model and show it in a View (Done)</li>
+        <li> Fix missing stock symbol data from by searching Nasdaq
+          <a href="https://www.nasdaq.com/screening/company-list.aspx"> DB</a>.
+          Then update the models in Django DB.(Done)
+        </li>
+        <li> Integrate this page with <a href="https://iextrading.com/developer">IEX API</a>
+          to show stock price info(To Be Done)</li>
+        <li> Paginate the View ( To Be Done )</li>
+        <li> Add Detail view for each company where you can see additional information
+          like historic stock price data for different time periods. ( To Be Done )</li>
+      </ul>
     </div>
     {% for company in object_list %}
       <div class="card my-3 mx-2">
@@ -39,6 +51,8 @@
                 <th scope="col">Revenue ($)</th>
                 <th scope="col">Profit ($)</th>
                 <th scope="col">Assets ($)</th>
+                <th scope="col">Stock Symbol</th>
+                <th scope="col">Stock Price ($)</th>
                 <th scope="col">City/State</th>
                 <th scope="col">Employees</th>
               </tr>
@@ -48,6 +62,8 @@
                 <td>$ {{ company.revenue | get_billion | intword }}</td>
                 <td>$ {{ company.profits | get_billion | intword}}</td>
                 <td>$ {{ company.assets | get_billion | intword }}</td>
+                <td>$ {{ company.stock_ticker }}</td>
+                <td>$(coming soon)</td>
                 <td>{{ company.city }} / {{ company.state }}</td>
                 <td>{{ company.employees | intcomma }}</td>
               </tr>

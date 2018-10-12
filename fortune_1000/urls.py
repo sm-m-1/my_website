@@ -15,11 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from projects import views
+from fortune_1000.views import CompanyListView
 
 urlpatterns = [
-    path('', views.projects_page, name="projects"),
-    path('breakout_game/', include('breakout_game.urls')),
-    path('fortune_1000/', include('fortune_1000.urls')),
-
+    path('companies/', CompanyListView.as_view(), name="fortune_1000_companies"),
 ]

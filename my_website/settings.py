@@ -89,17 +89,15 @@ WSGI_APPLICATION = 'my_website.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': '',
-        'USER': '',
-        'PASSWORD': '',
-        'HOST': '',
+        'NAME': os.environ.get('DATABASE_NAME', ''),
+        'USER': os.environ.get('DATABASE_USER', ''),
+        'PASSWORD': os.environ.get('DATABASE_PASSWORD', ''),
+        'HOST': os.environ.get('DATABASE_HOST', ''),
         'PORT': '5432',
     }
 }
 # DATABASES['default'] = dj_database_url.config()
-# DATABASES['default']['ENGINE'] = 'django.db.backends.postgresql_psycopg2'
-
-print("database url:", os.environ.get('DATABASE_URL'))
+# DATABASES['default']['ENGINE'] = 'django.db.backends.postgresql_psycopg2' 
 
 
 # Password validation

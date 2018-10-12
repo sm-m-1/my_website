@@ -62,7 +62,7 @@
                 <td>$ {{ company.revenue | get_billion | intword }}</td>
                 <td>$ {{ company.profits | get_billion | intword}}</td>
                 <td>$ {{ company.assets | get_billion | intword }}</td>
-                <td>$ {{ company.stock_ticker }}</td>
+                <td>{{ company.stock_ticker }}</td>
                 <td>$(coming soon)</td>
                 <td>{{ company.city }} / {{ company.state }}</td>
                 <td>{{ company.employees | intcomma }}</td>

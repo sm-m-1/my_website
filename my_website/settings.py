@@ -96,8 +96,10 @@ DATABASES = {
         'PORT': '5432',
     }
 }
-DATABASES['default'] = dj_database_url.config()
+# DATABASES['default'] = dj_database_url.config()
 # DATABASES['default']['ENGINE'] = 'django.db.backends.postgresql_psycopg2'
+
+print("database url:", os.environ.get('DATABASE_URL'))
 
 
 # Password validation

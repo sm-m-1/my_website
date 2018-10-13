@@ -6,14 +6,20 @@
 {% endblock base_head %}
 
 {% block content %}
-{#  <h1 class="text-center">{{ title }}</h1>#}
-{#  <h1 class="text-center">{{ content }}</h1>#}
   <div class="container">
     <div class="row">
-      <div class="card mx-auto my-5" style="width: 45rem;">
+      <div class="card mx-auto mt-4" style="width: 45rem;">
+        <div class="card-body">
+          <h6 class="mt-2">{{ quote_of_day.body }}</h6>
+          <h6 class="card-subtitle mb-2 text-muted">--- {{ quote_of_day.author }}</h6>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="card mx-auto my-4" style="width: 45rem;">
         <div class="card-body">
           <h2 class="card-title mt-2">Hi, I am SM</h2>
-          <h6 class="card-subtitle mb-2 text-muted">Curious Learner. Software Engineer. Currently a student at Cornell University</h6>
+          <h6 class="card-subtitle mb-2 text-muted">Curious Learner. Software Engineer. Creative Thinker. Currently a student at Cornell University</h6>
           <div class="mt-3">
             <a href="/static/sm_mashuque_fall_2018_resume_.pdf" target="_blank" class="btn btn-warning mr-2">Resume</a>
             <a href="https://www.linkedin.com/in/smmashuq/" target="_blank" class="btn btn-primary mr-2">LinkedIn</a>
@@ -25,31 +31,19 @@
         </div>
       </div>
     </div>
-    {#  About me section. Keep it in home for now. #}
-    <div class="row">
-      <div class="card mx-auto my-5" style="width: 45rem;">
+    <div class="row {% if nasa_apod.success == False %} d-none {% endif %} ">
+      <div class="card mx-auto my-1" style="width: 45rem;">
+        <h2 class="mt-2 ml-3">Nasa Astronomy Picture of the Day (APOD API)</h2>
+        <img class="card-img-top" src="{{ nasa_apod.hdurl }}" alt="breakout_game_image">
         <div class="card-body">
-          <h2 class="card-title mt-2">More about myself</h2>
-          <p class="card-subtitle mt-4">
-            Software Engineer with a hunger to learn and grow.
-            Learning new things about software design always excites me.
-            I want to learn and master programming skills that can be used to solve real life problems.
-            I enjoy reading books and I am always looking to expand my understanding of important programming concepts and best practices.
-            I want to keep learning and develop my understanding of various ideas in software architecture and web scalability.
-            So far, my experience has been more about working with back-end technologies,
-            but I do have interest in learning about front-end technologies.
-          </p>
-          <p class="card-subtitle mt-4">
-            The Framework that I know most is Django. I am most experienced in Python.
-            I also have intermediate skills in Java, C/C++, and JavaScript.
-            Also, I have some experience with - React, jQuery, PHP, BootStrap, MySQL.
-          </p>
-          <p class="card-subtitle mt-4">
-            You may contact me at <a href="mailto:smjim1998@gmail.com">smjim1998@gmail.com</a>
-            or at <a href="mailto:sm2344@cornell.edu">sm2344@cornell.edu</a>
-          </p>
-          <p class="card-subtitle mt-4"> Check out my projects!</p>
-          <p class="card-subtitle mt-4"> Thank you for visiting my website.</p>
+          <div class="clearfix jumbotron-fluid">
+            <h4 class="card-title mt-2 float-left">{{ nasa_apod.title }}</h4>
+            <p class="text-muted float-right">
+              Image Credit:
+              <a href="https://apod.nasa.gov/apod/astropix.html" target="_blank">{{ nasa_apod.copyright }}</a>
+            </p>
+          </div>
+          <p class="card-subtitle mt-4"><i>Explanation: </i>{{ nasa_apod.explanation }}</p>
         </div>
       </div>
     </div>

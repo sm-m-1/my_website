@@ -15,6 +15,7 @@ import pytz
 NASA_APOD_URL = "https://api.nasa.gov/planetary/apod?api_key="
 NASA_APOD_URL += os.environ.get('NASA_APOD_API_KEY', 'DEMO_KEY')
 
+QUOTE_OF_DAY_URL = "https://favqs.com/api/qotd"
 
 def home_page(request):
     # make the APOD api call and create it in the database if needed.
@@ -46,6 +47,9 @@ def home_page(request):
             sys.stdout.flush()
             context['nasa_apod'].update( { 'apod_success':  False } )
 
+    a_quote = json.load(http_request.urlopen(QUOTE_OF_DAY_URL, timeout=100))
+    print("found the quote", a_quote)
+    sys.stdout.flush()
     # set a quote.
     context['quote_of_day'] = {
         'author': 'Albert Einstein',

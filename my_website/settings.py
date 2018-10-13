@@ -22,7 +22,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '4y3zpy*g8o7*oe04tt&_qi@ik923ym$a8x9d%2ld0b)1yphgtz'
+SECRET_KEY = os.environ.get('SECRET_KEY', '4y3zpy*g8o7*oe04tt&_qi@ik923ym$a8x9d%2ld0b)1yphgtz')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -159,7 +159,7 @@ STATICFILES_DIRS = [
 # Activate Django-Heroku.
 django_heroku.settings(locals())
 
-# import dj_database_url
+# add heroku production database credentials.
 prod_db_settings = dj_database_url.config(conn_max_age=600)
 DATABASES['default'].update(prod_db_settings)
 DATABASES['default']['ENGINE'] = 'django.db.backends.postgresql_psycopg2'

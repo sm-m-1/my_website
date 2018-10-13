@@ -34,7 +34,7 @@
     <div class="row {% if nasa_apod.success == False %} d-none {% endif %} ">
       <div class="card mx-auto my-1" style="width: 45rem;">
         <h2 class="mt-2 ml-3">Nasa Astronomy Picture of the Day (APOD API)</h2>
-        <img class="card-img-top" src="{{ nasa_apod.hdurl }}" alt="breakout_game_image">
+        <img class="card-img-top" src="{{ nasa_apod.hdurl }}" alt="nasa_apod_image_url">
         <div class="card-body">
           <div class="clearfix jumbotron-fluid">
             <h4 class="card-title mt-2 float-left">{{ nasa_apod.title }}</h4>

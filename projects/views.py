@@ -15,7 +15,6 @@ import pytz
 NASA_APOD_URL = "https://api.nasa.gov/planetary/apod?api_key="
 NASA_APOD_URL += os.environ.get('NASA_APOD_API_KEY', 'DEMO_KEY')
 
-QUOTE_OF_DAY_URL = "https://favqs.com/api/qotd"
 
 def home_page(request):
     # make the APOD api call and create it in the database if needed.

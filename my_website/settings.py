@@ -27,7 +27,7 @@ SECRET_KEY = '4y3zpy*g8o7*oe04tt&_qi@ik923ym$a8x9d%2ld0b)1yphgtz'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['https://pacific-retreat-99874.herokuapp.com', 'http://smmashuq.com', '']
 
 # Application definition
 

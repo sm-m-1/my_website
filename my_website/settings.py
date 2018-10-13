@@ -25,7 +25,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '4y3zpy*g8o7*oe04tt&_qi@ik923ym$a8x9d%2ld0b)1yphgtz'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -104,10 +104,10 @@ WSGI_APPLICATION = 'my_website.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'd8k3af1ao42qla',
-        'USER': 'jeceznlzplypbj',
-        'PASSWORD': '66e80a621183c39b942eca594557fff63430516b08bce9bd2a3694393003a9da',
-        'HOST': 'ec2-54-225-110-152.compute-1.amazonaws.com',
+        'NAME': 'smmashuque',
+        'USER': 'smmashuque',
+        'PASSWORD': '',
+        'HOST': 'localhost',
         'PORT': '5432',
     }
 }
@@ -160,5 +160,6 @@ STATICFILES_DIRS = [
 django_heroku.settings(locals())
 
 # import dj_database_url
-# DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
-# DATABASES['default']['ENGINE'] = 'django.db.backends.postgresql_psycopg2'
+prod_db_settings = dj_database_url.config(conn_max_age=600)
+DATABASES['default'].update(prod_db_settings)
+DATABASES['default']['ENGINE'] = 'django.db.backends.postgresql_psycopg2'

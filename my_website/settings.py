@@ -86,31 +86,31 @@ WSGI_APPLICATION = 'my_website.wsgi.application'
 # }
 #
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': os.environ['DATABASE_NAME'],
-        'USER': os.environ['DATABASE_USER'],
-        'PASSWORD': os.environ['DATABASE_PASSWORD'],
-        'HOST': os.environ['DATABASE_HOST'],
-        'PORT': '5432',
-    }
-}
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': os.environ['DATABASE_NAME'],
+#         'USER': os.environ['DATABASE_USER'],
+#         'PASSWORD': os.environ['DATABASE_PASSWORD'],
+#         'HOST': os.environ['DATABASE_HOST'],
+#         'PORT': '5432',
+#     }
+# }
 
 # DATABASES['default'] = dj_database_url.config()
 # DATABASES['default']['ENGINE'] = 'django.db.backends.postgresql_psycopg2' 
 
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': 'smmashuque',
-#         'USER': 'smmashuque',
-#         'PASSWORD': '',
-#         'HOST': 'localhost',
-#         'PORT': '5432',
-#     }
-# }
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'smmashuque',
+        'USER': 'smmashuque',
+        'PASSWORD': '',
+        'HOST': 'localhost',
+        'PORT': '5432',
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/2.1/ref/settings/#auth-password-validators
@@ -158,3 +158,6 @@ STATICFILES_DIRS = [
 
 # Activate Django-Heroku.
 django_heroku.settings(locals())
+
+import dj_database_url
+DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)

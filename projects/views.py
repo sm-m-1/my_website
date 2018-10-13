@@ -13,7 +13,7 @@ import pytz
 # Create your views here.
 
 NASA_APOD_URL = "https://api.nasa.gov/planetary/apod?api_key="
-NASA_APOD_URL += os.environ.get('NASA_APOD_API_KEY', 'DEMO_KEY')
+NASA_APOD_URL += 'DEMO_KEY'
 
 QUOTE_OF_DAY_URL = "https://favqs.com/api/qotd"
 
@@ -48,7 +48,10 @@ def home_page(request):
             context['nasa_apod'].update( { 'apod_success':  False } )
 
     a_quote = json.load(http_request.urlopen(QUOTE_OF_DAY_URL, timeout=100))
+    nasa_apod_content = json.load(http_request.urlopen(NASA_APOD_URL, timeout=100))
     print("found the quote", a_quote)
+    sys.stdout.flush()
+    print("found the apod content", nasa_apod_content)
     sys.stdout.flush()
     # set a quote.
     context['quote_of_day'] = {

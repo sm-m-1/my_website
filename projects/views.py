@@ -1,3 +1,5 @@
+import sys
+
 from django.shortcuts import render
 import os
 import json
@@ -6,6 +8,7 @@ import urllib.request as http_request
 from nasa_apod_api.models import NasaAPOD
 import datetime
 import pytz
+
 
 # Create your views here.
 
@@ -39,7 +42,9 @@ def home_page(request):
                 hdurl=nasa_apod_content.get('hdurl'),
                 url=nasa_apod_content.get('url')
             )
-        except (http_request.HTTPError, http_request.URLError):
+        except (http_request.HTTPError, http_request.URLError) as e:
+            print("error trying to get apod", e)
+            sys.stdout.flush()
             context['nasa_apod'].update( { 'apod_success':  False } )
 
     # set a quote.

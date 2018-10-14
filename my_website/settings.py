@@ -162,6 +162,6 @@ STATICFILES_DIRS = [
 django_heroku.settings(locals())
 
 # add heroku production database credentials.
-prod_db_settings = dj_database_url.config(conn_max_age=600)
+prod_db_settings = dj_database_url.config(conn_max_age=600, ssl_require=True)
 DATABASES['default'].update(prod_db_settings)
 DATABASES['default']['ENGINE'] = 'django.db.backends.postgresql_psycopg2'

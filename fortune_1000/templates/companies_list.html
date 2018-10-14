@@ -34,6 +34,17 @@
           like historic stock price data for different time periods. ( To Be Done )</li>
       </ul>
     </div>
+    <h3>Stocks data test:</h3>
+{#    <p>{{ stocks_data }}</p>#}
+    {% for stock, data in stocks_data.items %}
+      <p class="my-2">{{ stock }}</p>
+      <p class="my-2">{{ data.quote.open }}</p>
+        <ol>
+        {% for item in data %}
+{#          <li>{{ item }}</li>#}
+        {% endfor %}
+        </ol>
+    {% endfor %}
     {% for company in object_list %}
       <div class="card my-3 mx-2">
 {#        <div class="card-header border-0">#}

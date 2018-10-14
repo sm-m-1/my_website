@@ -18,7 +18,7 @@ NASA_APOD_URL += 'DEMO_KEY' # use a demo key for now until I figure out how to u
 
 def home_page(request):
     # make the APOD api call and create it in the database if needed.
-    today = datetime.datetime.now(pytz.timezone('US/Pacific')).strftime('%Y-%m-%d')
+    today = datetime.datetime.now(pytz.timezone('US/Eastern')).strftime('%Y-%m-%d')
     nasa_apod_object = NasaAPOD.objects.filter(date=today)
     context = {
         'nasa_apod': {},

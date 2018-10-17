@@ -13,7 +13,7 @@ import urllib.request as http_request
 class CompanyListView(ListView):
     template_name = "companies_list.html"
     model = Company
-    paginate_by = 50
+    paginate_by = 25
 
 
     # Might need to do additional work here in future. For now default behavior occurs.

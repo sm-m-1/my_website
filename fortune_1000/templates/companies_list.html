@@ -28,13 +28,13 @@
         </li>
         <li> Integrate this page with <a href="https://iextrading.com/developer">IEX API</a>
           to show stock price info(Done)</li>
-        <li> Paginate the View ( To Be Done )</li>
+        <li> Paginate the View ( Done )</li>
         <li> Add searching functionality ( To Be Done )</li>
         <li> Add Detail view for each company where you can see additional information
-          like historic stock price data for different time periods. ( To Be Done )</li>
+          like historic stock price data for different time periods after clicking on it.( To Be Done )</li>
       </ul>
     </div>
-    <h3>Stocks data test:</h3>
+    <h3>Companies list:</h3>
       <div class="card my-3 mx-2">
 {#        <div class="card-header border-0">#}
 {#          <img src="/static/site_images/placeholder.png" alt="company_img_placeholder", width="200rem;">#}
@@ -53,7 +53,7 @@
             <tbody>
               {% for company in paginated_companies %}
               <tr>
-                <th scope="col">{{ forloop.counter }}</th>
+                <th scope="col">{{ company.rank }}</th>
                 <th scope="col">{{ company.name }}</th>
                 <td>{{ company.stock_symbol }}</td>
                 <td>$ {{ company.stocks_data.quote.latestPrice }}</td>
@@ -70,24 +70,25 @@
         {#        Potential future footer#}
         {#    </div>#}
       </div>
+
       {% if is_paginated %}
-        <ul class="pagination">
-        {% if page_obj.has_previous %}
-            <li>
-                <span><a href="?page={{ page_obj.previous_page_number }}">Previous</a></span>
+        <nav aria-label="Page navigation example">
+          <ul class="pagination">
+            {% if page_obj.has_previous %}
+              <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.previous_page_number }}">Previous</a>
+              </li>
+            {% endif %}
+            <li class="page-item mx-2 border border-dark rounded py-2 px-2">
+              <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.</span>
             </li>
-        {% endif %}
-            <li class="">
-                <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.</span>
+            {% if page_obj.has_next %}
+            <li class="page-item">
+                <a class="page-link" href="?page={{ page_obj.next_page_number }}">Next</a>
             </li>
-        {% if page_obj.has_next %}
-            <li>
-                <span><a href="?page={{ page_obj.next_page_number }}">Next</a></span>
-            </li>
-        {% endif %}
-        </ul>
-        {% else %}
-            <p>Not yet available</p>
+            {% endif %}
+          </ul>
+        </nav>
       {% endif %}
   </div>
 

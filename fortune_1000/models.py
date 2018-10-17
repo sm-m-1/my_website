@@ -4,7 +4,7 @@ from django.db import models
 
 class Company(models.Model):
     name = models.CharField(max_length=200)
-    stock_ticker = models.CharField(max_length=200, null=True)
+    stock_symbol = models.CharField(max_length=200, null=True)
     rank = models.IntegerField(null=True)
     revenue = models.BigIntegerField(null=True)
     profits = models.DecimalField(max_digits=30, decimal_places=10, null=True)

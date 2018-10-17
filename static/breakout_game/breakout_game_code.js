@@ -48,11 +48,11 @@ var music;
 function create() {
 
     music = game.add.audio('boden');
-    music.volume = .05;
+    music.volume = .01;
     weaponAudio = game.add.audio('weaponAudio');
     brickAudio = game.add.audio('brickAudio');
-    weaponAudio.volume = .1;
-    brickAudio.volume = .1;
+    weaponAudio.volume = .07;
+    brickAudio.volume = .07;
 
     music.play();
 

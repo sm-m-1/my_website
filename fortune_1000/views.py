@@ -5,6 +5,7 @@ from django.views.generic import ListView, DetailView
 from django.core.paginator import Paginator
 from django.core.paginator import EmptyPage
 from django.core.paginator import PageNotAnInteger
+from django.db.models import Q
 from .models import Company
 import json
 import urllib.request as http_request
@@ -19,7 +20,14 @@ class CompanyListView(ListView):
     # Might need to do additional work here in future. For now default behavior occurs.
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(object_list=object_list, **kwargs)
-        paginator = Paginator(self.get_queryset(), self.paginate_by)
+        query = self.request.GET.get('q')
+        queryset = self.get_queryset()
+        if query:
+            queryset = self.get_queryset().filter(
+                Q(name__icontains=query) | Q(stock_symbol__icontains=query)
+            )
+
+        paginator = Paginator(queryset, self.paginate_by)
         page = self.request.GET.get('page')
         try:
             paginated_companies = paginator.page(page)

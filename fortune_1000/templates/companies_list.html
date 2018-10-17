@@ -35,6 +35,11 @@
       </ul>
     </div>
     <h3>Companies list:</h3>
+    <form class="form-inline my-2 my-lg-0" action="{% url 'fortune_1000_companies' %}">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" name="q"
+             value="{{ request.GET.q }}" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
       <div class="card my-3 mx-2">
 {#        <div class="card-header border-0">#}
 {#          <img src="/static/site_images/placeholder.png" alt="company_img_placeholder", width="200rem;">#}

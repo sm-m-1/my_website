@@ -38,7 +38,7 @@ class CompanyListView(ListView):
             paginated_companies = paginator.page(paginator.num_pages)
         context['paginated_companies'] = paginated_companies
         companies_list = paginated_companies.object_list
-        print("paginated_companies:", paginated_companies.object_list)
+        # print("paginated_companies:", paginated_companies.object_list)
 
         # add stock day. Initial attempt.
         IEX_URL = "https://api.iextrading.com/1.0/stock/market/batch?symbols="

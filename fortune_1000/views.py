@@ -22,6 +22,7 @@ class CompanyListView(ListView):
         context = super().get_context_data(object_list=object_list, **kwargs)
         query = self.request.GET.get('q')
         queryset = self.get_queryset()
+        # replace the queryset with search queries if present.
         if query:
             queryset = self.get_queryset().filter(
                 Q(name__icontains=query) | Q(stock_symbol__icontains=query)

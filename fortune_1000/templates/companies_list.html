@@ -10,10 +10,9 @@
 {% block content %}
   <div class="container">
     <div class="card my-2">
-      <h5 class="card-title mx-2 my-2"> This is a list of 2018 Fortune 1000 companies.</h5>
+      <h5 class="card-title mx-2 my-2"> This is a list of Nasdaq companies with their Stock Data.</h5>
       <p class="card-text mx-2 my-2">
-        The initial data has been extracted from a Kaggle dataset.
-        You can see the csv data at <a href="https://www.kaggle.com/Eruditepanda/fortune-1000-2018/version/3">Kaggle</a>
+        The initial data of company name and stock symbol has been extracted from a CSV file provided by Nasdaq.
       </p>
       <p class="card-text mx-2 my-2">
         The goal of this project is to learn and gain practice on how to load data into a Django model, persist it in
@@ -28,56 +27,39 @@
           Then update the models in Django DB.(Done)
         </li>
         <li> Integrate this page with <a href="https://iextrading.com/developer">IEX API</a>
-          to show stock price info(To Be Done)</li>
+          to show stock price info(Done)</li>
         <li> Paginate the View ( To Be Done )</li>
+        <li> Add searching functionality ( To Be Done )</li>
         <li> Add Detail view for each company where you can see additional information
           like historic stock price data for different time periods. ( To Be Done )</li>
       </ul>
     </div>
     <h3>Stocks data test:</h3>
-{#    <p>{{ stocks_data }}</p>#}
-    {% for stock, data in stocks_data.items %}
-      <p class="my-2">{{ stock }}</p>
-      <p class="my-2">{{ data.quote.open }}</p>
-        <ol>
-        {% for item in data %}
-{#          <li>{{ item }}</li>#}
-        {% endfor %}
-        </ol>
-    {% endfor %}
-    {% for company in object_list %}
       <div class="card my-3 mx-2">
 {#        <div class="card-header border-0">#}
 {#          <img src="/static/site_images/placeholder.png" alt="company_img_placeholder", width="200rem;">#}
 {#        </div>#}
         <div class="card-block px-2">
-          <div class="clearfix jumbotron-fluid">
-            <h4 class="card-title mt-2 float-left">{{ company.name }}</h4>
-            <p class="text-muted float-right">{{ company.rank }}</p>
-          </div>
-          <h6 class="text-muted">CEO: {{ company.ceo }}</h6>
-          <table class="table table-sm">
-            <thead class="">
+          <table class="table table-striped">
+            <thead class="thead-dark">
               <tr>
-                <th scope="col">Revenue ($)</th>
-                <th scope="col">Profit ($)</th>
-                <th scope="col">Assets ($)</th>
+                <th scope="col">Rank</th>
+                <th scope="col">Name</th>
                 <th scope="col">Stock Symbol</th>
                 <th scope="col">Stock Price ($)</th>
-                <th scope="col">City/State</th>
-                <th scope="col">Employees</th>
+                <th scope="col">Market Value ($)</th>
               </tr>
             </thead>
             <tbody>
+              {% for company in paginated_companies %}
               <tr>
-                <td>$ {{ company.revenue | multiply_by_1m | intword }}</td>
-                <td>$ {{ company.profits | multiply_by_1k | intword }}</td>
-                <td>$ {{ company.assets | multiply_by_1m | intword }}</td>
-                <td>{{ company.stock_ticker }}</td>
-                <td>$(coming soon)</td>
-                <td>{{ company.city }} / {{ company.state }}</td>
-                <td>{{ company.employees | intcomma }}</td>
+                <th scope="col">{{ forloop.counter }}</th>
+                <th scope="col">{{ company.name }}</th>
+                <td>{{ company.stock_symbol }}</td>
+                <td>$ {{ company.stocks_data.quote.latestPrice }}</td>
+                <td>$ {{ company.market_value | intword }}</td>
               </tr>
+              {% endfor %}
             </tbody>
           </table>
 {#          <p class="card-text">Description</p>#}
@@ -88,7 +70,25 @@
         {#        Potential future footer#}
         {#    </div>#}
       </div>
-    {% endfor %}
+      {% if is_paginated %}
+        <ul class="pagination">
+        {% if page_obj.has_previous %}
+            <li>
+                <span><a href="?page={{ page_obj.previous_page_number }}">Previous</a></span>
+            </li>
+        {% endif %}
+            <li class="">
+                <span>Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.</span>
+            </li>
+        {% if page_obj.has_next %}
+            <li>
+                <span><a href="?page={{ page_obj.next_page_number }}">Next</a></span>
+            </li>
+        {% endif %}
+        </ul>
+        {% else %}
+            <p>Not yet available</p>
+      {% endif %}
   </div>
 
 

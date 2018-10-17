@@ -60,7 +60,5 @@ class CompanyListView(ListView):
         queryset = Company.objects.get_queryset().order_by('-market_value')
         return queryset
 
-    def add_stock_data(self, stocks_data):
-        return ""
 
 

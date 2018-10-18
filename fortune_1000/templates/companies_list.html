@@ -61,7 +61,14 @@
                 <th scope="col">{{ company.rank }}</th>
                 <th scope="col">{{ company.name }}</th>
                 <td>{{ company.stock_symbol }}</td>
-                <td>$ {{ company.stocks_data.quote.latestPrice }}</td>
+                <td>$ {{ company.stocks_data.quote.latestPrice }}
+                  <span class="small {% if company.stocks_data.quote.change <= 0 %} text-danger {% else %} text-success {% endif %} ">
+                    {{ company.stocks_data.quote.change }}
+                  </span>
+                  <span class="small {% if company.stocks_data.quote.change <= 0 %} text-danger {% else %} text-success {% endif %} ">
+                    ({{ company.stocks_data.quote.changePercent | floatformat:"-2" }}%)
+                  </span>
+                </td>
                 <td>$ {{ company.market_value | intword }}</td>
               </tr>
               {% endfor %}

@@ -1,3 +1,8 @@
 body {
     background-color: #f4f6f9 !important;
 }
+
+#about_project_nasdaq_companies:hover {
+    background-color: #232425;
+    color: white;
+}

@@ -76,7 +76,7 @@
                     {{ company.stocks_data.quote.change }}
                   </span>
                   <span class="small {% if company.stocks_data.quote.change <= 0 %} text-danger {% else %} text-success {% endif %} ">
-                    ({{ company.stocks_data.quote.changePercent | floatformat:"-2" }}%)
+                    ({{ company.stocks_data.quote.changePercent | multiply:100 | floatformat:"-2" }}%)
                   </span>
                 </td>
                 <td>$ {{ company.market_value | intword }}</td>

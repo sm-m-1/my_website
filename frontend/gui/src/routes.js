@@ -7,7 +7,7 @@ import StocksListContainer from './containers/CompanyList'
 const BaseRouter = () => (
 
   <div>
-    <Route exact path='/' component={StocksListContainer} />
+    <Route exact path='/projects/fortune_1000/companies/v2/' component={StocksListContainer} />
     {/*<Route exact path='/:articleID' component={ArticleDetail} />*/}
   </div>
 );

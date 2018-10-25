@@ -1,5 +1,6 @@
 import React from 'react';
-import axios from 'axios';
+import axios from 'axios'
+import { Pagination } from 'antd';
 
 import StocksList from '../components/StockItem';
 
@@ -21,10 +22,15 @@ class StocksListContainer extends React.Component {
   state = {
     companies: []
   }
+
+  SERVER_BACKEND_API_URL = 'http://127.0.0.1:8000/projects/fortune_1000/companies/api';
+  SERVER_BACKEND_PAGE_SIZE = 0;
   IEX_URL = "https://api.iextrading.com/1.0/stock/market/batch?symbols=";
   IEX_TYPE = "&types=quote";
 
   getStockPrices = (url) => {
+    // setInterval(() => this.forceUpdate(), 2000);
+    // this.forceUpdateInterval = setInterval(() => this.forceUpdate(), 2000);
     // this returns a javascript promise
     return axios.get(url)
       .then(response => {
@@ -33,10 +39,18 @@ class StocksListContainer extends React.Component {
       })
   }
 
+  // componentWillUnmount() {
+  //   clearInterval(this.forceUpdateInterval);
+  // }
+
   componentDidMount() {
-    axios.get('http://127.0.0.1:8000/projects/fortune_1000/companies/api')
+    // setInterval(() => this.forceUpdate(), 3000);
+    axios.get(this.SERVER_BACKEND_API_URL)
       .then(response => {
+        console.log("response from api:", response);
         var companiesList = response.data.results;
+        this.SERVER_BACKEND_PAGE_SIZE = response.data.count;
+        console.log("SERVER_BACKEND_PAGE_SIZE", this.SERVER_BACKEND_PAGE_SIZE);
         console.log("companies:: ", companiesList);
         var companiesSymbols = "";
         for (var i = 0; i < companiesList.length; i++) {
@@ -86,10 +100,58 @@ class StocksListContainer extends React.Component {
     }));
   };
 
+  onPageChange = (pageNumber) => {
+    // This clearing of the force update interval is needed otherwise the old one from previous
+    // page will still get called every two seconds.
+    clearInterval(this.forceUpdateInterval);
+    console.log('Page: ', pageNumber);
+    var newAPIUrl = this.SERVER_BACKEND_API_URL+"?page="+pageNumber;
+    axios.get(newAPIUrl)
+      .then(response => {
+        console.log("response from api:", response);
+        this.NEXT_PAGE_URL = response.data.next;
+        var companiesList = response.data.results;
+        console.log("companies:: ", companiesList);
+        var companiesSymbols = "";
+        for (var i = 0; i < companiesList.length; i++) {
+          companiesSymbols += companiesList[i].stock_symbol + ",";
+        }
+        // console.log("companiesSymbols: ", companiesSymbols);
+        var fullUrl = this.IEX_URL + companiesSymbols + this.IEX_TYPE;
+        var latestPrices = {};
+        this.getStockPrices(fullUrl)
+          .then(response => {
+            Object.keys(response).forEach(function(key, index) {
+              // Object.assign(latestPrices, {key: response[key]['quote']['latestPrice']});
+              latestPrices[key] = response[key]['quote']['latestPrice'];
+              // console.log(key, ":", response[key]['quote']['latestPrice']);
+            });
+            // console.log('latestPrices: ', JSON.stringify(latestPrices));
+            for (i = 0; i < companiesList.length; i++) {
+              var companyObject = companiesList[i];
+              var companySymbol = companyObject.stock_symbol;
+              // console.log('companyObject: ', companyObject);
+              // console.log('companySymbol: ', companySymbol);
+              var price = latestPrices[companySymbol];
+              companyObject['latest_price'] = price;
+              // console.log("price", price);
+              // companiesList[i].foo = "bar";
+            }
+            this.setState({
+              companies: companiesList,
+            });
+
+          });
+        // this.forceUpdate();
+        // console.log("this.state: ", companiesList);
+      })
+  }
+
   render() {
-    console.log("the state:", this.state);
+    // console.log("the state:", this.state);
     return (
       <div>
+        <Pagination showQuickJumper defaultCurrent={1} total={this.SERVER_BACKEND_PAGE_SIZE} onChange={this.onPageChange} />
         <StocksList data={this.state}/>
         <br />
       </div>

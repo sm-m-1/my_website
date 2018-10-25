@@ -25,10 +25,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = os.environ.get('SECRET_KEY', '4y3zpy*g8o7*oe04tt&_qi@ik923ym$a8x9d%2ld0b)1yphgtz')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
-# DEBUG = True
+# DEBUG = False
+DEBUG = True
 
-SECURE_SSL_REDIRECT = True
+# SECURE_SSL_REDIRECT = True
 
 ALLOWED_HOSTS = ['https://pacific-retreat-99874.herokuapp.com', 'http://smmashuq.com', '']
 
@@ -45,9 +45,12 @@ INSTALLED_APPS = [
     'fortune_1000',
     'nasa_apod_api',
     'django.contrib.humanize',
+    'corsheaders',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -56,6 +59,13 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+CORS_ORIGIN_WHITELIST = (
+    # 'google.com',
+    # 'hostname.example.com',
+    'localhost:3000',
+)
+
 
 ROOT_URLCONF = 'my_website.urls'
 
@@ -164,6 +174,6 @@ STATICFILES_DIRS = [
 django_heroku.settings(locals())
 
 # add heroku production database credentials.
-prod_db_settings = dj_database_url.config(conn_max_age=600, ssl_require=True)
-DATABASES['default'].update(prod_db_settings)
-DATABASES['default']['ENGINE'] = 'django.db.backends.postgresql_psycopg2'
+# prod_db_settings = dj_database_url.config(conn_max_age=600, ssl_require=True)
+# DATABASES['default'].update(prod_db_settings)
+# DATABASES['default']['ENGINE'] = 'django.db.backends.postgresql_psycopg2'

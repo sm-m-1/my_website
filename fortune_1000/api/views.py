@@ -12,7 +12,7 @@ from fortune_1000.models import Company
 from .serializers import CompanySerializer
 
 class CompanyPagination(PageNumberPagination):
-    page_size = 5
+    page_size = 10
 
 class CompanyViewSet(viewsets.ModelViewSet):
     """

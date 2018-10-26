@@ -175,7 +175,7 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"), # needed for Django server
-    os.path.join(BASE_DIR, "build/static"), # needed for React app
+    # os.path.join(BASE_DIR, "build/static"), # needed for React app
     # '/var/www/static/',
 ]
 

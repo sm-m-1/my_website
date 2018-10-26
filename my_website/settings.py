@@ -72,8 +72,8 @@ ROOT_URLCONF = 'my_website.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')]
-        ,
+        'DIRS': [os.path.join(BASE_DIR, 'templates'),
+                 os.path.join(BASE_DIR, 'build')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -165,7 +165,8 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
+    os.path.join(BASE_DIR, "static"), # needed for Django server
+    os.path.join(BASE_DIR, "build/static"), # needed for React app
     # '/var/www/static/',
 ]
 
@@ -174,6 +175,6 @@ STATICFILES_DIRS = [
 django_heroku.settings(locals())
 
 # add heroku production database credentials.
-# prod_db_settings = dj_database_url.config(conn_max_age=600, ssl_require=True)
-# DATABASES['default'].update(prod_db_settings)
-# DATABASES['default']['ENGINE'] = 'django.db.backends.postgresql_psycopg2'
+prod_db_settings = dj_database_url.config(conn_max_age=600, ssl_require=True)
+DATABASES['default'].update(prod_db_settings)
+DATABASES['default']['ENGINE'] = 'django.db.backends.postgresql_psycopg2'

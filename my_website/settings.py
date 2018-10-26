@@ -28,7 +28,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', '4y3zpy*g8o7*oe04tt&_qi@ik923ym$a8x9d%
 DEBUG = False
 # DEBUG = True
 
-# SECURE_SSL_REDIRECT = True
+SECURE_SSL_REDIRECT = True
 
 ALLOWED_HOSTS = ['https://pacific-retreat-99874.herokuapp.com', 'http://smmashuq.com', '']
 

@@ -16,7 +16,7 @@
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "postinstall": "npm run build --prefix frontend/gui/"
+    "postinstall": "npm run build"
   },
   "engines": {
     "node": "9.3.0",

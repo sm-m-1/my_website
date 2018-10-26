@@ -11,6 +11,7 @@ django-extensions = "*"
 dj-database-url = "*"
 djangorestframework = "*"
 django-cors-headers = "*"
+whitenoise = "*"
 
 [dev-packages]
 

@@ -39,6 +39,8 @@ const ProjectGoals = (props) => {
                   Learn to use ChartJS.( To Be Done )
                 </li>
               </ul>
+              <p>Check out the <a href="https://smmashuq.com/projects/fortune_1000/companies/">V1 </a>
+                of this project which does not have React on Frontend, and only uses Django.</p>
             </div>
           </div>
         </div>

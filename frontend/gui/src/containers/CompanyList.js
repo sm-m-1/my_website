@@ -1,10 +1,12 @@
 import React from 'react';
 import axios from 'axios'
-import { Pagination } from 'antd';
+import { Pagination, Input, AutoComplete } from 'antd';
 
 import StocksList from '../components/StockItem';
 
 // import CustomForm from "../components/Form";
+
+const Search = Input.Search;
 
 const listData = [];
 for (let i = 0; i < 23; i++) {
@@ -20,7 +22,8 @@ for (let i = 0; i < 23; i++) {
 class StocksListContainer extends React.Component {
 
   state = {
-    companies: []
+    companies: [],
+    companiesName: [],
   }
 
   SERVER_BACKEND_API_URL = 'http://127.0.0.1:8000/projects/fortune_1000/companies/api';
@@ -36,6 +39,10 @@ class StocksListContainer extends React.Component {
       .then(response => {
         // console.log("stocksResponse:", response);
         return response.data;
+      })
+      .catch(e => {
+        // console.log("error when calling IEX:", e);
+        throw e;
       })
   }
 
@@ -87,8 +94,86 @@ class StocksListContainer extends React.Component {
       })
   }
 
-  handleArticlesCreate = (attrs) => {
-    this.createArticles(attrs);
+  handleSearch2 = (query) => {
+    var newAPIUrl = this.SERVER_BACKEND_API_URL+"?q="+query;
+    axios.get(newAPIUrl)
+      .then(response => {
+        console.log("responseeeeee:", response);
+        var names = [];
+        var objectArray = response.data.results;
+        Object.keys(objectArray).forEach(function(key, index) {
+          names.push(objectArray[key].name + " ( " + objectArray[key].stock_symbol + " )")
+        });
+        this.setState({
+          companiesName: names
+        })
+      })
+
+    // this.setState({
+    //   companiesName: !query ? [] : [
+    //     query,
+    //     query + query,
+    //     query + query + query,
+    //   ],
+    // })
+  }
+
+
+  handleSearch = (query) => {
+    // this.createArticles(attrs);
+    console.log(query);
+    clearInterval(this.forceUpdateInterval);
+    var newAPIUrl = this.SERVER_BACKEND_API_URL+"?q="+query;
+    axios.get(newAPIUrl)
+      .then(response => {
+        console.log("response from api:", response);
+        var names = [];
+        var objectArray = response.data.results;
+        Object.keys(objectArray).forEach(function(key, index) {
+          names.push(objectArray[key].name + " ( " + objectArray[key].stock_symbol + " )")
+        });
+        this.setState({
+          companiesName: names
+        })
+        this.NEXT_PAGE_URL = response.data.next;
+        var companiesList = response.data.results;
+        if (companiesList.length === 0) {
+          return;
+        }
+        console.log("companies:: ", companiesList);
+        var companiesSymbols = "";
+        for (var i = 0; i < companiesList.length; i++) {
+          companiesSymbols += companiesList[i].stock_symbol + ",";
+        }
+        // console.log("companiesSymbols: ", companiesSymbols);
+        var fullUrl = this.IEX_URL + companiesSymbols + this.IEX_TYPE;
+        var latestPrices = {};
+        this.getStockPrices(fullUrl)
+          .then(response => {
+            Object.keys(response).forEach(function(key, index) {
+              // Object.assign(latestPrices, {key: response[key]['quote']['latestPrice']});
+              latestPrices[key] = response[key]['quote']['latestPrice'];
+              // console.log(key, ":", response[key]['quote']['latestPrice']);
+            });
+            // console.log('latestPrices: ', JSON.stringify(latestPrices));
+            for (i = 0; i < companiesList.length; i++) {
+              var companyObject = companiesList[i];
+              var companySymbol = companyObject.stock_symbol;
+              // console.log('companyObject: ', companyObject);
+              // console.log('companySymbol: ', companySymbol);
+              var price = latestPrices[companySymbol];
+              companyObject['latest_price'] = price;
+              // console.log("price", price);
+              // companiesList[i].foo = "bar";
+            }
+            this.setState({
+              companies: companiesList,
+            });
+
+          });
+        // this.forceUpdate();
+        // console.log("this.state: ", companiesList);
+      })
   }
 
 
@@ -104,7 +189,6 @@ class StocksListContainer extends React.Component {
     // This clearing of the force update interval is needed otherwise the old one from previous
     // page will still get called every two seconds.
     clearInterval(this.forceUpdateInterval);
-    console.log('Page: ', pageNumber);
     var newAPIUrl = this.SERVER_BACKEND_API_URL+"?page="+pageNumber;
     axios.get(newAPIUrl)
       .then(response => {
@@ -151,8 +235,23 @@ class StocksListContainer extends React.Component {
     // console.log("the state:", this.state);
     return (
       <div>
+        {/*<Search*/}
+          {/*placeholder="search."*/}
+          {/*onSearch={this.handleSearch}*/}
+          {/*enterButton*/}
+        {/*/>*/}
+        <div style={{float:'right'}}>
+          <AutoComplete
+            // dataSource={this.state.companiesName}
+            style={{ width: 240 }}
+            onSearch={this.handleSearch}
+            placeholder="Search here"
+          />
+        </div>
+        <div style={{clear:'both'}}>
+          <StocksList data={this.state}/>
+        </div>
         <Pagination showQuickJumper defaultCurrent={1} total={this.SERVER_BACKEND_PAGE_SIZE} onChange={this.onPageChange} />
-        <StocksList data={this.state}/>
         <br />
       </div>
     );

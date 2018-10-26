@@ -1,13 +1,13 @@
 import React from 'react';
 import axios from 'axios'
-import { Pagination, Input, AutoComplete, Card } from 'antd';
+import { Pagination, AutoComplete } from 'antd';
 
 import StocksList from '../components/StockItem';
 import ProjectGoals from "../components/ProjectGoal";
 
 // import CustomForm from "../components/Form";
 
-const Search = Input.Search;
+// const Search = Input.Search;
 
 const listData = [];
 for (let i = 0; i < 23; i++) {
@@ -55,35 +55,35 @@ class StocksListContainer extends React.Component {
     // setInterval(() => this.forceUpdate(), 3000);
     axios.get(this.SERVER_BACKEND_API_URL)
       .then(response => {
-        console.log("response from api:", response);
+        // console.log("response from api:", response);
         var companiesList = response.data.results;
         this.SERVER_BACKEND_PAGE_SIZE = response.data.count;
-        console.log("SERVER_BACKEND_PAGE_SIZE", this.SERVER_BACKEND_PAGE_SIZE);
-        console.log("companies:: ", companiesList);
+        // console.log("SERVER_BACKEND_PAGE_SIZE", this.SERVER_BACKEND_PAGE_SIZE);
+        // console.log("companies:: ", companiesList);
         var companiesSymbols = "";
         for (var i = 0; i < companiesList.length; i++) {
           companiesSymbols += companiesList[i].stock_symbol + ",";
         }
         // console.log("companiesSymbols: ", companiesSymbols);
         var fullUrl = this.IEX_URL + companiesSymbols + this.IEX_TYPE;
-        var latestPrices = {};
         this.getStockPrices(fullUrl)
           .then(response => {
-            Object.keys(response).forEach(function(key, index) {
-              // Object.assign(latestPrices, {key: response[key]['quote']['latestPrice']});
-              latestPrices[key] = response[key]['quote']['latestPrice'];
-              // console.log(key, ":", response[key]['quote']['latestPrice']);
-            });
+            // console.log("response from api:", response);
+
             // console.log('latestPrices: ', JSON.stringify(latestPrices));
             for (i = 0; i < companiesList.length; i++) {
               var companyObject = companiesList[i];
               var companySymbol = companyObject.stock_symbol;
               // console.log('companyObject: ', companyObject);
               // console.log('companySymbol: ', companySymbol);
-              var price = latestPrices[companySymbol];
-              companyObject['latest_price'] = price;
-              // console.log("price", price);
-              // companiesList[i].foo = "bar";
+              var price = response[companySymbol]['quote']['latestPrice'];
+              var priceChange = response[companySymbol]['quote']['change'];
+              var priceChangePercent = response[companySymbol]['quote']['changePercent'] * 100;
+              companyObject['latestPrice'] = price;
+              companyObject['priceChange'] = priceChange;
+              companyObject['priceChangeClass'] = (priceChange < 0) ? "text-danger": "text-success";
+              companyObject['priceChangePercent'] = (priceChangePercent).toFixed(2);
+              companyObject['priceChangePercentClass'] = (priceChangePercent < 0) ? "text-danger": "text-success";
             }
             this.setState({
               companies: companiesList,
@@ -99,7 +99,7 @@ class StocksListContainer extends React.Component {
     var newAPIUrl = this.SERVER_BACKEND_API_URL+"?q="+query;
     axios.get(newAPIUrl)
       .then(response => {
-        console.log("responseeeeee:", response);
+        // console.log("responseeeeee:", response);
         var names = [];
         var objectArray = response.data.results;
         Object.keys(objectArray).forEach(function(key, index) {
@@ -122,50 +122,40 @@ class StocksListContainer extends React.Component {
 
   handleSearch = (query) => {
     // this.createArticles(attrs);
-    console.log(query);
+    // console.log(query);
     clearInterval(this.forceUpdateInterval);
     var newAPIUrl = this.SERVER_BACKEND_API_URL+"?q="+query;
     axios.get(newAPIUrl)
       .then(response => {
-        console.log("response from api:", response);
-        var names = [];
-        var objectArray = response.data.results;
-        Object.keys(objectArray).forEach(function(key, index) {
-          names.push(objectArray[key].name + " ( " + objectArray[key].stock_symbol + " )")
-        });
-        this.setState({
-          companiesName: names
-        })
-        this.NEXT_PAGE_URL = response.data.next;
+        // console.log("response from api:", response);
         var companiesList = response.data.results;
-        if (companiesList.length === 0) {
-          return;
-        }
-        console.log("companies:: ", companiesList);
+        this.SERVER_BACKEND_PAGE_SIZE = response.data.count;
+        // console.log("SERVER_BACKEND_PAGE_SIZE", this.SERVER_BACKEND_PAGE_SIZE);
+        // console.log("companies:: ", companiesList);
         var companiesSymbols = "";
         for (var i = 0; i < companiesList.length; i++) {
           companiesSymbols += companiesList[i].stock_symbol + ",";
         }
         // console.log("companiesSymbols: ", companiesSymbols);
         var fullUrl = this.IEX_URL + companiesSymbols + this.IEX_TYPE;
-        var latestPrices = {};
         this.getStockPrices(fullUrl)
           .then(response => {
-            Object.keys(response).forEach(function(key, index) {
-              // Object.assign(latestPrices, {key: response[key]['quote']['latestPrice']});
-              latestPrices[key] = response[key]['quote']['latestPrice'];
-              // console.log(key, ":", response[key]['quote']['latestPrice']);
-            });
+            // console.log("response from api:", response);
+
             // console.log('latestPrices: ', JSON.stringify(latestPrices));
             for (i = 0; i < companiesList.length; i++) {
               var companyObject = companiesList[i];
               var companySymbol = companyObject.stock_symbol;
               // console.log('companyObject: ', companyObject);
               // console.log('companySymbol: ', companySymbol);
-              var price = latestPrices[companySymbol];
-              companyObject['latest_price'] = price;
-              // console.log("price", price);
-              // companiesList[i].foo = "bar";
+              var price = response[companySymbol]['quote']['latestPrice'];
+              var priceChange = response[companySymbol]['quote']['change'];
+              var priceChangePercent = response[companySymbol]['quote']['changePercent'] * 100;
+              companyObject['latestPrice'] = price;
+              companyObject['priceChange'] = priceChange;
+              companyObject['priceChangeClass'] = (priceChange < 0) ? "text-danger": "text-success";
+              companyObject['priceChangePercent'] = (priceChangePercent).toFixed(2);
+              companyObject['priceChangePercentClass'] = (priceChangePercent < 0) ? "text-danger": "text-success";
             }
             this.setState({
               companies: companiesList,
@@ -179,8 +169,8 @@ class StocksListContainer extends React.Component {
 
 
   createArticles = (attrs) => {
-    console.log("state: ", this.state);
-    console.log("######: ", attrs);
+    // console.log("state: ", this.state);
+    // console.log("######: ", attrs);
     this.setState( state => ({
       companies: [...state.companies, attrs.data],
     }));
@@ -193,34 +183,31 @@ class StocksListContainer extends React.Component {
     var newAPIUrl = this.SERVER_BACKEND_API_URL+"?page="+pageNumber;
     axios.get(newAPIUrl)
       .then(response => {
-        console.log("response from api:", response);
-        this.NEXT_PAGE_URL = response.data.next;
+        // console.log("response from api:", response);
         var companiesList = response.data.results;
-        console.log("companies:: ", companiesList);
+        this.SERVER_BACKEND_PAGE_SIZE = response.data.count;
         var companiesSymbols = "";
         for (var i = 0; i < companiesList.length; i++) {
           companiesSymbols += companiesList[i].stock_symbol + ",";
         }
         // console.log("companiesSymbols: ", companiesSymbols);
         var fullUrl = this.IEX_URL + companiesSymbols + this.IEX_TYPE;
-        var latestPrices = {};
         this.getStockPrices(fullUrl)
           .then(response => {
-            Object.keys(response).forEach(function(key, index) {
-              // Object.assign(latestPrices, {key: response[key]['quote']['latestPrice']});
-              latestPrices[key] = response[key]['quote']['latestPrice'];
-              // console.log(key, ":", response[key]['quote']['latestPrice']);
-            });
+            // console.log("response from api:", response);
+
             // console.log('latestPrices: ', JSON.stringify(latestPrices));
             for (i = 0; i < companiesList.length; i++) {
               var companyObject = companiesList[i];
               var companySymbol = companyObject.stock_symbol;
-              // console.log('companyObject: ', companyObject);
-              // console.log('companySymbol: ', companySymbol);
-              var price = latestPrices[companySymbol];
-              companyObject['latest_price'] = price;
-              // console.log("price", price);
-              // companiesList[i].foo = "bar";
+              var price = response[companySymbol]['quote']['latestPrice'];
+              var priceChange = response[companySymbol]['quote']['change'];
+              var priceChangePercent = response[companySymbol]['quote']['changePercent'] * 100;
+              companyObject['latestPrice'] = price;
+              companyObject['priceChange'] = priceChange;
+              companyObject['priceChangeClass'] = (priceChange < 0) ? "text-danger": "text-success";
+              companyObject['priceChangePercent'] = (priceChangePercent).toFixed(2);
+              companyObject['priceChangePercentClass'] = (priceChangePercent < 0) ? "text-danger": "text-success";
             }
             this.setState({
               companies: companiesList,
@@ -238,6 +225,9 @@ class StocksListContainer extends React.Component {
       <div>
         <ProjectGoals> </ProjectGoals>
         <h2>Live Nasdaq Data: </h2>
+        <div style={{float:'left'}}>
+          <Pagination simple defaultCurrent={1} total={this.SERVER_BACKEND_PAGE_SIZE} onChange={this.onPageChange} />
+        </div>
         <div style={{float:'right'}}>
           <AutoComplete
             // dataSource={this.state.companiesName}
@@ -249,7 +239,6 @@ class StocksListContainer extends React.Component {
         <div style={{clear:'both'}}>
           <StocksList data={this.state}/>
         </div>
-        <Pagination showQuickJumper defaultCurrent={1} total={this.SERVER_BACKEND_PAGE_SIZE} onChange={this.onPageChange} />
         <br />
       </div>
     );

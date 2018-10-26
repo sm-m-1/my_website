@@ -1,9 +1,7 @@
 import React from 'react';
-import { Card } from 'antd';
-import { List, Avatar, Icon } from 'antd';
+import { List } from 'antd';
 
 const StocksList = (props) => {
-  console.log("props:", JSON.stringify(props));
   return (
      <List
         itemLayout="horizontal"
@@ -13,8 +11,11 @@ const StocksList = (props) => {
             <List.Item.Meta
               // avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
               // title={<a className="text-dark" href="">{item.name} ( {item.stock_symbol} )</a>}
-              title={<h6 className="text-dark" >{item.name} ( {item.stock_symbol} )</h6>}
-              description={<p className="text-dark">${item.latest_price}</p>}
+              title={<p style={{'fontSize': '15px'}} className="text-dark" >{item.name} ( {item.stock_symbol} )</p>}
+              description={<p className="text-dark">${item.latestPrice}
+                <span className={'small ' + item.priceChangeClass}> {item.priceChange} </span>
+                <span className={'small ' + item.priceChangePercentClass}>({item.priceChangePercent}%)</span>
+              </p>}
             />
           </List.Item>
         )}

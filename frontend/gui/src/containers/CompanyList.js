@@ -1,8 +1,9 @@
 import React from 'react';
 import axios from 'axios'
-import { Pagination, Input, AutoComplete } from 'antd';
+import { Pagination, Input, AutoComplete, Card } from 'antd';
 
 import StocksList from '../components/StockItem';
+import ProjectGoals from "../components/ProjectGoal";
 
 // import CustomForm from "../components/Form";
 
@@ -235,11 +236,8 @@ class StocksListContainer extends React.Component {
     // console.log("the state:", this.state);
     return (
       <div>
-        {/*<Search*/}
-          {/*placeholder="search."*/}
-          {/*onSearch={this.handleSearch}*/}
-          {/*enterButton*/}
-        {/*/>*/}
+        <ProjectGoals> </ProjectGoals>
+        <h2>Live Nasdaq Data: </h2>
         <div style={{float:'right'}}>
           <AutoComplete
             // dataSource={this.state.companiesName}

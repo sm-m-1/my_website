@@ -34,7 +34,7 @@ class StocksListContainer extends React.Component {
 
   getStockPrices = (url) => {
     // setInterval(() => this.forceUpdate(), 2000);
-    // this.forceUpdateInterval = setInterval(() => this.forceUpdate(), 2000);
+    // this.forceUpdateInterval = setInterval(() => this.fetchStockData(), 2000);
     // this returns a javascript promise
     return axios.get(url)
       .then(response => {
@@ -51,9 +51,10 @@ class StocksListContainer extends React.Component {
   //   clearInterval(this.forceUpdateInterval);
   // }
 
-  componentDidMount() {
-    // setInterval(() => this.forceUpdate(), 3000);
-    axios.get(this.SERVER_BACKEND_API_URL)
+  fetchStockData = (apiURL) => {
+    // this.forceUpdateInterval = setInterval(() => this.forceUpdate(), 1000);
+    // axios.get(this.SERVER_BACKEND_API_URL)
+    axios.get(apiURL)
       .then(response => {
         // console.log("response from api:", response);
         var companiesList = response.data.results;
@@ -94,6 +95,7 @@ class StocksListContainer extends React.Component {
         // console.log("this.state: ", companiesList);
       })
   }
+
 
   handleSearch2 = (query) => {
     var newAPIUrl = this.SERVER_BACKEND_API_URL+"?q="+query;
@@ -109,114 +111,29 @@ class StocksListContainer extends React.Component {
           companiesName: names
         })
       })
-
-    // this.setState({
-    //   companiesName: !query ? [] : [
-    //     query,
-    //     query + query,
-    //     query + query + query,
-    //   ],
-    // })
   }
 
+  componentDidMount() {
+    this.forceUpdateInterval = setInterval(() => this.fetchStockData(this.SERVER_BACKEND_API_URL), 1000);
+    this.fetchStockData(this.SERVER_BACKEND_API_URL);
+  }
 
   handleSearch = (query) => {
     // this.createArticles(attrs);
     // console.log(query);
     clearInterval(this.forceUpdateInterval);
     var newAPIUrl = this.SERVER_BACKEND_API_URL+"?q="+query;
-    axios.get(newAPIUrl)
-      .then(response => {
-        // console.log("response from api:", response);
-        var companiesList = response.data.results;
-        this.SERVER_BACKEND_PAGE_SIZE = response.data.count;
-        // console.log("SERVER_BACKEND_PAGE_SIZE", this.SERVER_BACKEND_PAGE_SIZE);
-        // console.log("companies:: ", companiesList);
-        var companiesSymbols = "";
-        for (var i = 0; i < companiesList.length; i++) {
-          companiesSymbols += companiesList[i].stock_symbol + ",";
-        }
-        // console.log("companiesSymbols: ", companiesSymbols);
-        var fullUrl = this.IEX_URL + companiesSymbols + this.IEX_TYPE;
-        this.getStockPrices(fullUrl)
-          .then(response => {
-            // console.log("response from api:", response);
-
-            // console.log('latestPrices: ', JSON.stringify(latestPrices));
-            for (i = 0; i < companiesList.length; i++) {
-              var companyObject = companiesList[i];
-              var companySymbol = companyObject.stock_symbol;
-              // console.log('companyObject: ', companyObject);
-              // console.log('companySymbol: ', companySymbol);
-              var price = response[companySymbol]['quote']['latestPrice'];
-              var priceChange = response[companySymbol]['quote']['change'];
-              var priceChangePercent = response[companySymbol]['quote']['changePercent'] * 100;
-              companyObject['latestPrice'] = price;
-              companyObject['priceChange'] = priceChange;
-              companyObject['priceChangeClass'] = (priceChange < 0) ? "text-danger": "text-success";
-              companyObject['priceChangePercent'] = (priceChangePercent).toFixed(2);
-              companyObject['priceChangePercentClass'] = (priceChangePercent < 0) ? "text-danger": "text-success";
-            }
-            this.setState({
-              companies: companiesList,
-            });
-
-          });
-        // this.forceUpdate();
-        // console.log("this.state: ", companiesList);
-      })
+    this.forceUpdateInterval = setInterval(() => this.fetchStockData(newAPIUrl), 1000);
+    this.fetchStockData(newAPIUrl);
   }
 
-
-  createArticles = (attrs) => {
-    // console.log("state: ", this.state);
-    // console.log("######: ", attrs);
-    this.setState( state => ({
-      companies: [...state.companies, attrs.data],
-    }));
-  };
-
-  onPageChange = (pageNumber) => {
+  handlePageChange = (pageNumber) => {
     // This clearing of the force update interval is needed otherwise the old one from previous
     // page will still get called every two seconds.
     clearInterval(this.forceUpdateInterval);
     var newAPIUrl = this.SERVER_BACKEND_API_URL+"?page="+pageNumber;
-    axios.get(newAPIUrl)
-      .then(response => {
-        // console.log("response from api:", response);
-        var companiesList = response.data.results;
-        this.SERVER_BACKEND_PAGE_SIZE = response.data.count;
-        var companiesSymbols = "";
-        for (var i = 0; i < companiesList.length; i++) {
-          companiesSymbols += companiesList[i].stock_symbol + ",";
-        }
-        // console.log("companiesSymbols: ", companiesSymbols);
-        var fullUrl = this.IEX_URL + companiesSymbols + this.IEX_TYPE;
-        this.getStockPrices(fullUrl)
-          .then(response => {
-            // console.log("response from api:", response);
-
-            // console.log('latestPrices: ', JSON.stringify(latestPrices));
-            for (i = 0; i < companiesList.length; i++) {
-              var companyObject = companiesList[i];
-              var companySymbol = companyObject.stock_symbol;
-              var price = response[companySymbol]['quote']['latestPrice'];
-              var priceChange = response[companySymbol]['quote']['change'];
-              var priceChangePercent = response[companySymbol]['quote']['changePercent'] * 100;
-              companyObject['latestPrice'] = price;
-              companyObject['priceChange'] = priceChange;
-              companyObject['priceChangeClass'] = (priceChange < 0) ? "text-danger": "text-success";
-              companyObject['priceChangePercent'] = (priceChangePercent).toFixed(2);
-              companyObject['priceChangePercentClass'] = (priceChangePercent < 0) ? "text-danger": "text-success";
-            }
-            this.setState({
-              companies: companiesList,
-            });
-
-          });
-        // this.forceUpdate();
-        // console.log("this.state: ", companiesList);
-      })
+    this.forceUpdateInterval = setInterval(() => this.fetchStockData(newAPIUrl), 1000);
+    this.fetchStockData(newAPIUrl);
   }
 
   render() {
@@ -226,7 +143,7 @@ class StocksListContainer extends React.Component {
         <ProjectGoals> </ProjectGoals>
         <h2>Live Nasdaq Data: </h2>
         <div style={{float:'left'}}>
-          <Pagination simple defaultCurrent={1} total={this.SERVER_BACKEND_PAGE_SIZE} onChange={this.onPageChange} />
+          <Pagination simple defaultCurrent={1} total={this.SERVER_BACKEND_PAGE_SIZE} onChange={this.handlePageChange} />
         </div>
         <div style={{float:'right'}}>
           <AutoComplete

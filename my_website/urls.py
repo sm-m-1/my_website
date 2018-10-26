@@ -23,5 +23,5 @@ urlpatterns = [
     path('', home_page, name="home"),
     path('about/', about_page, name="about"),
     path('projects/', include('projects.urls')),
-    # re_path('.*', TemplateView.as_view(template_name="index.html"))
+    re_path('.*', TemplateView.as_view(template_name="index.html"))
 ]

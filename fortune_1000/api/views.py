@@ -15,7 +15,7 @@ from .serializers import CompanySerializer
 class CompanyPagination(PageNumberPagination):
     page_size = 10
 
-class CompanyViewSet(viewsets.ModelViewSet):
+class CompanyViewSet(viewsets.ReadOnlyModelViewSet):
     """
     A viewset for viewing and editing user instances.
     """

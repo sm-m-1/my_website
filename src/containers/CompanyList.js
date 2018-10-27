@@ -57,7 +57,7 @@ class StocksListContainer extends React.Component {
     // axios.get(this.SERVER_BACKEND_API_URL)
     axios.get(apiURL)
       .then(response => {
-        // console.log("response from api:", response);
+        console.log("response from internal api:", response);
         var companiesList = response.data.results;
         this.SERVER_BACKEND_PAGE_SIZE = response.data.count;
         // console.log("SERVER_BACKEND_PAGE_SIZE", this.SERVER_BACKEND_PAGE_SIZE);
@@ -70,7 +70,7 @@ class StocksListContainer extends React.Component {
         var fullUrl = this.IEX_URL + companiesSymbols + this.IEX_TYPE;
         this.getStockPrices(fullUrl)
           .then(response => {
-            // console.log("response from api:", response);
+            console.log("response from iex api:", response);
 
             // console.log('latestPrices: ', JSON.stringify(latestPrices));
             for (i = 0; i < companiesList.length; i++) {

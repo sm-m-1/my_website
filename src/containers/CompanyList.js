@@ -91,9 +91,14 @@ class StocksListContainer extends React.Component {
               companies: companiesList,
             });
 
-          });
-        // this.forceUpdate();
+          })
+          .catch(e => {
+            console.log('error fetching iex data', e);
+          })
         // console.log("this.state: ", companiesList);
+      })
+      .catch(e => {
+        console.log('error fetching internal api data', e);
       })
   }
 

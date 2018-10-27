@@ -29,6 +29,7 @@ DEBUG = False
 # DEBUG = True
 
 SECURE_SSL_REDIRECT = True
+# SECURE_SSL_REDIRECT = False
 
 ALLOWED_HOSTS = ['https://pacific-retreat-99874.herokuapp.com', 'http://smmashuq.com', '']
 
@@ -65,7 +66,7 @@ MIDDLEWARE = [
 CORS_ORIGIN_WHITELIST = (
     # 'google.com',
     # 'hostname.example.com',
-    # 'smmashuq.com/',
+    'smmashuq.com/',
     'localhost:3000',
     'localhost:8000',
 )

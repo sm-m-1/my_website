@@ -120,13 +120,24 @@ WSGI_APPLICATION = 'my_website.wsgi.application'
 # DATABASES['default']['ENGINE'] = 'django.db.backends.postgresql_psycopg2' 
 
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
+#         'NAME': 'smmashuque',
+#         'USER': 'smmashuque',
+#         'PASSWORD': '',
+#         'HOST': 'localhost',
+#         'PORT': '5432',
+#     }
+# }
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'smmashuque',
-        'USER': 'smmashuque',
+        'NAME': '',
+        'USER': '',
         'PASSWORD': '',
-        'HOST': 'localhost',
+        'HOST': '',
         'PORT': '5432',
     }
 }

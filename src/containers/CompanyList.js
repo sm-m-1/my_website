@@ -57,7 +57,7 @@ class StocksListContainer extends React.Component {
     // axios.get(this.SERVER_BACKEND_API_URL)
     axios.get(apiURL)
       .then(response => {
-        console.log("response from internal api:", response);
+        // console.log("response from internal api:", response);
         var companiesList = response.data.results;
         this.SERVER_BACKEND_PAGE_SIZE = response.data.count;
         // console.log("SERVER_BACKEND_PAGE_SIZE", this.SERVER_BACKEND_PAGE_SIZE);
@@ -70,7 +70,7 @@ class StocksListContainer extends React.Component {
         var fullUrl = this.IEX_URL + companiesSymbols + this.IEX_TYPE;
         this.getStockPrices(fullUrl)
           .then(response => {
-            console.log("response from iex api:", response);
+            // console.log("response from iex api:", response);
 
             // console.log('latestPrices: ', JSON.stringify(latestPrices));
             for (i = 0; i < companiesList.length; i++) {
@@ -148,10 +148,10 @@ class StocksListContainer extends React.Component {
       <div>
         <ProjectGoals> </ProjectGoals>
         <h2>Live Nasdaq Data: </h2>
-        <div style={{float:'left'}}>
+        <div className="my-2">
           <Pagination simple defaultCurrent={1} total={this.SERVER_BACKEND_PAGE_SIZE} onChange={this.handlePageChange} />
         </div>
-        <div style={{float:'right'}}>
+        <div className="my-2">
           <AutoComplete
             // dataSource={this.state.companiesName}
             style={{ width: 240 }}

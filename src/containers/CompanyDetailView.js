@@ -113,27 +113,29 @@ class CompanyDetail extends React.Component {
 
     return (
       <div>
-        <Button type="primary" className="my-4">
-          <a href="https://smmashuq.com/projects/fortune_1000/companies/v2">App Home</a>
-        </Button>
-        <Card title={this.state.company.name}>
-          <p>{this.state.company.stock_symbol} data for <span className="text-primary">{this.state.currentRange}</span></p>
-          <p>Latest price: <span className="text-primary">${this.state.latestPrice.latestPrice}</span></p>
-          <div className="row mt-2">
-            <ButtonGroup>
-              <Button active onClick={()=>this.updateGraph("1d")} > 1D</Button>
-              <Button onClick={()=>this.updateGraph("1m")} > 1M</Button>
-              <Button onClick={()=>this.updateGraph("3m")} > 3M</Button>
-              <Button onClick={()=>this.updateGraph("6m")} > 6M</Button>
-              <Button onClick={()=>this.updateGraph("1y")} > 1Y</Button>
-              <Button onClick={()=>this.updateGraph("2y")} > 2Y</Button>
-              <Button onClick={()=>this.updateGraph("5y")} > 5Y</Button>
-            </ButtonGroup>
-          </div>
-          <div className="row">
-            <Line data={data} options={chartOptions} height={95}/>
-          </div>
-        </Card>
+        <div className="container">
+          <Button type="primary" className="mb-2">
+            <a href="https://smmashuq.com/projects/fortune_1000/companies/v2">App Home</a>
+          </Button>
+          <Card title={this.state.company.name}>
+            <p>{this.state.company.stock_symbol} data for <span className="text-primary">{this.state.currentRange}</span></p>
+            <p>Latest price: <span className="text-primary">${this.state.latestPrice.latestPrice}</span></p>
+            <div className="row mt-2">
+              <ButtonGroup>
+                <Button active onClick={()=>this.updateGraph("1d")} > 1D</Button>
+                <Button onClick={()=>this.updateGraph("1m")} > 1M</Button>
+                <Button onClick={()=>this.updateGraph("3m")} > 3M</Button>
+                <Button onClick={()=>this.updateGraph("6m")} > 6M</Button>
+                <Button onClick={()=>this.updateGraph("1y")} > 1Y</Button>
+                <Button onClick={()=>this.updateGraph("2y")} > 2Y</Button>
+                <Button onClick={()=>this.updateGraph("5y")} > 5Y</Button>
+              </ButtonGroup>
+            </div>
+            <div className="row" >
+              <Line data={data} options={chartOptions}/>
+            </div>
+          </Card>
+        </div>
       </div>
 
     );

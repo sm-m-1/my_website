@@ -36,7 +36,7 @@ const ProjectGoals = (props) => {
                 <li> Live update the price change information using React and Django. ( Done )</li>
                 <li> Add Detail view for each company where you can see additional information
                   like historic stock price data for different time periods after clicking on it.
-                  Learn to use ChartJS.( To Be Done )
+                  Learn to use ChartJS.( Done )
                 </li>
               </ul>
               <p>Check out the <a href="https://smmashuq.com/projects/fortune_1000/companies/">V1 </a>

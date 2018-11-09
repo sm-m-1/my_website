@@ -114,8 +114,8 @@ class CompanyDetail extends React.Component {
     return (
       <div>
         <div className="container">
-          <Button type="primary" className="mb-2">
-            <a href="https://smmashuq.com/projects/fortune_1000/companies/v2">App Home</a>
+          <Button type="primary" className="mb-2" href="https://smmashuq.com/projects/fortune_1000/companies/v2">
+            App Home
           </Button>
           <Card title={this.state.company.name}>
             <p>{this.state.company.stock_symbol} data for <span className="text-primary">{this.state.currentRange}</span></p>

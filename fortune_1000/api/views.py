@@ -22,6 +22,7 @@ class CompanyViewSet(viewsets.ReadOnlyModelViewSet):
     serializer_class = CompanySerializer
     queryset = Company.objects.get_queryset().order_by('-market_value')
     pagination_class = CompanyPagination
+    lookup_field = 'stock_symbol'
 
     def get_queryset(self):
         queryset = super().get_queryset().order_by('-market_value')

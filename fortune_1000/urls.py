@@ -19,5 +19,5 @@ from fortune_1000.views import CompanyListView
 
 urlpatterns = [
     path('companies/', CompanyListView.as_view(), name="fortune_1000_companies"),
-    path('companies/api', include('fortune_1000.api.urls')),
+    path('companies/api/', include('fortune_1000.api.urls')),
 ]

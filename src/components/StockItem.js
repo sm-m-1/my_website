@@ -1,5 +1,6 @@
 import React from 'react';
 import NumberFormat from 'react-number-format';
+import { Link } from 'react-router-dom';
 
 const StocksList = (props) => {
   return (
@@ -17,7 +18,7 @@ const StocksList = (props) => {
         {props.data.companies.map((item, index) => (
           <tr>
             <th scope="col">{item.rank}</th>
-            <th scope="col">{item.name}</th>
+            <th scope="col"> <a href={`/projects/fortune_1000/companies/v2/${item.stock_symbol}/`}>{item.name} </a></th>
             <td>{item.stock_symbol}</td>
             <td className="text-dark">${item.latestPrice}
               <span className={'small ' + item.priceChangeClass}> {item.priceChange} </span>

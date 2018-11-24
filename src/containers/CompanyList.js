@@ -80,9 +80,11 @@ class StocksListContainer extends React.Component {
               // console.log('companySymbol: ', companySymbol);
               var price = response[companySymbol]['quote']['latestPrice'];
               var priceChange = response[companySymbol]['quote']['change'];
+              var marketCap = response[companySymbol]['quote']['marketCap'];
               var priceChangePercent = response[companySymbol]['quote']['changePercent'] * 100;
               companyObject['latestPrice'] = price;
               companyObject['priceChange'] = priceChange;
+              companyObject['marketCap'] = marketCap;
               companyObject['priceChangeClass'] = (priceChange < 0) ? "text-danger": "text-success";
               companyObject['priceChangePercent'] = (priceChangePercent).toFixed(2);
               companyObject['priceChangePercentClass'] = (priceChangePercent < 0) ? "text-danger": "text-success";

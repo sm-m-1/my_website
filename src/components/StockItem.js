@@ -24,7 +24,7 @@ const StocksList = (props) => {
               <span className={'small ' + item.priceChangeClass}> {item.priceChange} </span>
               <span className={'small ' + item.priceChangePercentClass}>({item.priceChangePercent}%)</span>
             </td>
-            <td><NumberFormat value={item.market_value} displayType={'text'} thousandSeparator={true} prefix={'$'} /></td>
+            <td><NumberFormat value={item.marketCap} displayType={'text'} thousandSeparator={true} prefix={'$'} /></td>
           </tr>
         ))}
       </tbody>

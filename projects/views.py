@@ -30,7 +30,7 @@ def home_page(request):
     else:
         # otherwise need to create the apod_object first then return.
         try:
-            nasa_apod_content = json.load(http_request.urlopen(NASA_APOD_URL, timeout=100))
+            nasa_apod_content = json.load(http_request.urlopen(NASA_APOD_URL, timeout=10))
             context["nasa_apod"] = nasa_apod_content
             context['nasa_apod']['apod_success'] = True
             NasaAPOD.objects.create(
@@ -44,7 +44,8 @@ def home_page(request):
         except (http_request.HTTPError, http_request.URLError) as e:
             print("error trying to get apod:", e)
             sys.stdout.flush()
-            context['nasa_apod'].update( { 'apod_success':  False } )
+            # if the request for today's picture failed, then use a old one.
+            context["nasa_apod"] = NasaAPOD.objects.first()
 
     # set a quote.
     context['quote_of_day'] = {

@@ -31,7 +31,11 @@ DEBUG = False
 SECURE_SSL_REDIRECT = True
 # SECURE_SSL_REDIRECT = False
 
-ALLOWED_HOSTS = ['https://pacific-retreat-99874.herokuapp.com', 'http://smmashuq.com', '']
+ALLOWED_HOSTS = [
+    'https://pacific-retreat-99874.herokuapp.com',
+    'http://smmashuq.com',
+    ''
+]
 
 # Application definition
 
@@ -104,17 +108,6 @@ WSGI_APPLICATION = 'my_website.wsgi.application'
 #     }
 # }
 #
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': os.environ['DATABASE_NAME'],
-#         'USER': os.environ['DATABASE_USER'],
-#         'PASSWORD': os.environ['DATABASE_PASSWORD'],
-#         'HOST': os.environ['DATABASE_HOST'],
-#         'PORT': '5432',
-#     }
-# }
 
 # DATABASES['default'] = dj_database_url.config()
 # DATABASES['default']['ENGINE'] = 'django.db.backends.postgresql_psycopg2' 

@@ -192,3 +192,9 @@ django_heroku.settings(locals())
 prod_db_settings = dj_database_url.config(conn_max_age=600, ssl_require=True)
 DATABASES['default'].update(prod_db_settings)
 DATABASES['default']['ENGINE'] = 'django.db.backends.postgresql_psycopg2'
+
+try:
+    from .local_settings import *
+except ImportError as e:
+    # ignore the existence of local_settings in production
+    pass

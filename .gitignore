@@ -124,6 +124,7 @@ scripts/flow/*/.flowconfig
 _SpecRunner.html
 __benchmarks__
 build/
+staticfiles/
 remote-repo/
 coverage/
 .module-cache

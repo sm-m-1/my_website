@@ -34,7 +34,7 @@ SECURE_SSL_REDIRECT = True
 ALLOWED_HOSTS = [
     'https://pacific-retreat-99874.herokuapp.com',
     'http://smmashuq.com',
-    'http://www.smmashuq.com'
+    ''
 ]
 
 # Application definition
@@ -71,8 +71,6 @@ CORS_ORIGIN_WHITELIST = (
     # 'google.com',
     # 'hostname.example.com',
     'smmashuq.com/',
-    'http://www.smmashuq.com',
-    'https://www.smmashuq.com',
     'localhost:3000',
     'localhost:8000',
 )

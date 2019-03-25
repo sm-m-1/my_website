@@ -2,6 +2,10 @@ body {
     background-color: #f4f6f9 !important;
 }
 
+.verdana_font {
+    font-family: "Verdana Vera Sans Mono", Monaco, "Courier New", Courier, monospace;
+}
+
 #about_project_nasdaq_companies:hover {
     background-color: #232425;
     color: white;

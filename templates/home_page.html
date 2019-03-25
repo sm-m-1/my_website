@@ -7,48 +7,43 @@
 
 {% block content %}
   <div class="container">
-    <div class="row">
-      <div class="card mx-auto mt-4" style="width: 45rem;">
-        <div class="card-body">
-          <h6 class="mt-2">{{ quote_of_day.body }}</h6>
-          <h6 class="card-subtitle mb-2 text-muted">--- {{ quote_of_day.author }}</h6>
-        </div>
-      </div>
-    </div>
+{#    <div class="row">#}
+{#      <div class="card mx-auto mt-4" style="width: 45rem;">#}
+{#        <div class="card-body">#}
+{#          <h6 class="mt-2">{{ quote_of_day.body }}</h6>#}
+{#          <h6 class="card-subtitle mb-2 text-muted">--- {{ quote_of_day.author }}</h6>#}
+{#        </div>#}
+{#      </div>#}
+{#    </div>#}
     <div class="row">
       <div class="card mx-auto my-4" style="width: 45rem;">
-        <div class="card-body">
-          <h2 class="card-title mt-2">Hi, I am SM</h2>
-          <h6 class="card-subtitle mb-2 text-muted">Curious Learner. Software Engineer. Creative Thinker. Currently a student at Cornell University</h6>
-          <div class="mt-3">
+        <div class="card-body verdana_font" style="height: 200px;">
+          <h2 class="card-title mt-2 animation_text" >Hi, I am SM.</h2>
+          <h6 class="card-subtitle mb-2 text-muted animation_text_2">Curious Learner. Software Engineer. Creative Thinker. Currently a student at Cornell University.</h6>
+          <div class="mt-3 d-none" id="home_page_links">
             <a href="/static/sm_mashuque_fall_2018_resume_.pdf" target="_blank" class="btn btn-outline-info m-1">Resume</a>
             <a href="https://www.linkedin.com/in/smmashuq/" target="_blank" class="btn btn-outline-primary m-1">LinkedIn</a>
             <a href="https://github.com/mashgreat2" target="_blank" class="btn btn-outline-success m-1">GitHub</a>
             <a href="{% url 'projects' %}" target="_blank" class="btn btn-outline-danger m-1">Projects</a>
           </div>
-          <p class="card-subtitle mt-4">
-             I update the website regularly. Please check back later to see my updated work.
-          </p>
         </div>
       </div>
     </div>
-{#    <div class="row">#}
-{#      <div class="card mx-auto my-1" style="width: 45rem;">#}
-{#        <h2 class="mt-2 ml-3">Nasa Astronomy Picture of the Day (APOD API)</h2>#}
-{#        <img class="card-img-top" src="{{ nasa_apod.url }}" alt="nasa_apod_image_url">#}
-{#        <div class="card-body">#}
-{#          <div class="clearfix jumbotron-fluid">#}
-{#            <h4 class="card-title mt-2 float-left">{{ nasa_apod.title }}</h4>#}
-{#            <p class="text-muted float-right">#}
-{#              Image Credit:#}
-{#              <a href="https://apod.nasa.gov/apod/astropix.html" target="_blank">{{ nasa_apod.copyright }}</a>#}
-{#            </p>#}
-{#          </div>#}
-{#          <p class="card-subtitle mt-4"><i>Explanation: </i>{{ nasa_apod.explanation }}</p>#}
-{#        </div>#}
-{#      </div>#}
-{#    </div>#}
   </div>
+  <script>
+  $('.animation_text').textillate({
+    initialDelay: 250,
+    in: { effect: 'fadeInLeft', delay: 20, } });
+  $('.animation_text_2').textillate({
+    initialDelay: 600,
+    in: { effect: 'fadeInLeft', delay: 20, } });
+  $('.animation_text_3').textillate({
+    initialDelay: 1000,
+    in: { effect: 'fadeInLeft', delay: 20, } });
+  setTimeout(() => {
+    $('#home_page_links').fadeIn( 600 ).removeClass("d-none");
+  }, 1500);
+  </script>
 
 
 {% endblock content %}

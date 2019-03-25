@@ -30,6 +30,6 @@ const StocksList = (props) => {
       </tbody>
     </table>
   );
-}
+};
 
 export default StocksList;

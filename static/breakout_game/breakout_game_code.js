@@ -110,7 +110,7 @@ function create() {
     game.input.onDown.add(releaseBall, this);
 
     //  Creates 30 bullets, using the 'bullet' graphic
-    weapon = game.add.weapon(1, 'bullet');
+    weapon = game.add.weapon(100, 'bullet');
     weapon.bulletKillType = Phaser.Weapon.KILL_WORLD_BOUNDS;
     weapon.bulletAngleOffset = 90;
     weapon.bulletSpeed = 400;
@@ -119,13 +119,13 @@ function create() {
     weapon.bulletAngleVariance = 1.5;
     weapon.trackSprite(paddle, paddle.width/2 - 5, 0);
 
-    weapon2 = game.add.weapon(1, 'bullet');
+    weapon2 = game.add.weapon(100, 'bullet');
     weapon2.bulletKillType = Phaser.Weapon.KILL_WORLD_BOUNDS;
     weapon2.bulletAngleOffset = 90;
     weapon2.bulletSpeed = 400;
     weapon2.fireRate = 40;
     game.physics.enable(weapon2, Phaser.Physics.ARCADE);
-    weapon2.bulletAngleVariance = 1.5;
+    weapon2.bulletAngleVariance = 5.5;
 
     weapon2.trackSprite(paddle, -(paddle.width/2) , 0);
 

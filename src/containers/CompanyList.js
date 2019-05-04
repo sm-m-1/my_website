@@ -148,7 +148,7 @@ class StocksListContainer extends React.Component {
     // console.log("the state:", this.state);
     return (
       <div>
-        <ProjectGoals> </ProjectGoals>
+
         <h2>Live Nasdaq Data: </h2>
         <div className="my-2">
           <Pagination simple defaultCurrent={1} total={this.SERVER_BACKEND_PAGE_SIZE} onChange={this.handlePageChange} />
@@ -165,6 +165,7 @@ class StocksListContainer extends React.Component {
           <StocksList data={this.state} />
         </div>
         <br />
+        <ProjectGoals> </ProjectGoals>
       </div>
     );
   }

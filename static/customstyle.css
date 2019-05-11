@@ -20,7 +20,13 @@ body {
     font-size: 15px;
 }
 
-#mainpage-terminal {
+.shadow-effect {
+    border: 1px solid black;
+    border-radius: 5px;
+    box-shadow: 5px 5px 5px grey;
+}
+
+.mainpage-terminal {
     background-color: #384d70;
     color: white;
     border: 2px solid black;

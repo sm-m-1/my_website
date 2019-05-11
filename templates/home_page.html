@@ -1,45 +1,73 @@
 {% extends "base.html" %}
 {% load static %}
 
+{% block extra_scripts %}
+<script rel="text/javascript" src="/static/typed.min.js"></script>
+{% endblock extra_scripts %}
+
 {% block base_head %}
 
 {% endblock base_head %}
 
 {% block content %}
   <div class="container">
-{#    <div class="row">#}
-{#      <div class="card mx-auto mt-4" style="width: 45rem;">#}
-{#        <div class="card-body">#}
-{#          <h6 class="mt-2">{{ quote_of_day.body }}</h6>#}
-{#          <h6 class="card-subtitle mb-2 text-muted">--- {{ quote_of_day.author }}</h6>#}
-{#        </div>#}
-{#      </div>#}
-{#    </div>#}
     <div class="row">
-      <div class="card mx-auto my-4" style="width: 45rem;">
+      <div class="card mx-auto my-4" style="width: 45rem;" id="mainpage-terminal">
+        <div id="terminal-title-bar">
+          <span class="verdana_font" style="color: black;">Users/smmashuque/documents/website</span>
+        </div>
         <div class="card-body verdana_font" style="">
-          <h2 class="card-title mt-2 animation_text" >Hi, I am SM.</h2>
-          <h6 class="card-subtitle mb-2 text-muted animation_text_2">Curious Learner. Software Engineer. Creative Thinker. Currently a student at Cornell University.</h6>
-          <div class="mt-3 d-none" id="home_page_links">
+
+          <div id="typed-strings-container">
+            <p class="" >Hi, I am SM.</p>
+          </div>
+
+          <div>
+            <span id="typed-strings-id"></span>
+          </div>
+
+          <div id="typed-strings-container-2" class="my-2">
+
+          </div>
+          <div>
+            <span id="typed-strings-id-2"></span>
+          </div>
+
+{#          <h6 class="card-subtitle mb-2 text-muted animation_text_2">Curious Learner. Software Engineer. Creative Thinker. Currently a student at Cornell University.</h6>#}
+
+          <div class="mt-3" id="home_page_links">
             <a href="/static/SM_Mashuque_SP_2019_v4.pdf" target="_blank" class="btn btn-outline-info m-1">Resume</a>
             <a href="https://www.linkedin.com/in/smmashuq/" target="_blank" class="btn btn-outline-primary m-1">LinkedIn</a>
             <a href="https://github.com/mashgreat2" target="_blank" class="btn btn-outline-success m-1">GitHub</a>
             <a href="{% url 'projects' %}" class="btn btn-outline-danger m-1">Projects</a>
           </div>
+
         </div>
       </div>
     </div>
   </div>
   <script>
-  $('.animation_text').textillate({
-    initialDelay: 400,
-    in: { effect: 'fadeInLeft', delay: 100, } });
-  $('.animation_text_2').textillate({
-    initialDelay: 400,
-    in: { effect: 'fadeInLeft', delay: 25, } });
-  setTimeout(() => {
-    $('#home_page_links').fadeIn( 600 ).removeClass("d-none");
-  }, 1000);
+    var typed = new Typed('#typed-strings-id',{
+                    stringsElement: '#typed-strings-container',
+                    backSpeed: 50,
+                    typeSpeed: 50
+                  });
+
+    var typed2 = new Typed('#typed-strings-id-2',{
+                    strings: [
+                      "Software Engineer.",
+                      "Curious Learner.",
+                      "Creative Thinker.",
+                      "Motivated.",
+                      "Adventurous.",
+                      "Persistent.",
+                      "Currently a student at Cornell University.",
+                    ],
+                    backSpeed: 40,
+                    typeSpeed: 40,
+                    loop: true,
+                  });
+
   </script>
 
 

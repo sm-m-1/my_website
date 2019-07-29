@@ -18,8 +18,9 @@ class CompanyDetail extends React.Component {
     currentRange: "",
   }
 
-  IEX_URL = "https://api.iextrading.com/1.0/stock/";
+  IEX_URL = "https://cloud.iexapis.com/stable/stock/";
   IEX_URL_RANGE = "/chart/1m/";
+  TOKEN = "?token=pk_b1b20925e6fc4ba9bee7ba356f543220"
 
   // SERVER_BACKEND_API_URL = 'http://127.0.0.1:8000/projects/fortune_1000/companies/api/';
   SERVER_BACKEND_API_URL = 'https://smmashuq.com/projects/fortune_1000/companies/api/';
@@ -33,7 +34,7 @@ class CompanyDetail extends React.Component {
         });
         this.IEX_URL += res.data.stock_symbol;
         // console.log(res.data);
-        axios.get(this.IEX_URL+this.IEX_URL_RANGE)
+        axios.get(this.IEX_URL+this.IEX_URL_RANGE+this.TOKEN)
           .then( response => {
             // console.log("IEX RESPONSE: ", response);
             // save the labels in the state
@@ -53,7 +54,7 @@ class CompanyDetail extends React.Component {
             // console.log("state.labelData : ", this.state.labelData);
           });
         // get the latest price and save that.
-        axios.get(this.IEX_URL+"/book")
+        axios.get(this.IEX_URL+"/book"+this.TOKEN)
           .then( response => {
             this.setState({
               latestPrice: response.data.quote
@@ -64,7 +65,7 @@ class CompanyDetail extends React.Component {
   }
 
   updateGraph = (time) => {
-    axios.get(this.IEX_URL+"/chart/"+time)
+    axios.get(this.IEX_URL+"/chart/"+time+this.TOKEN)
       .then( response => {
         // console.log("IEX RESPONSE: ", response);
         // save the labels in the state
@@ -122,13 +123,13 @@ class CompanyDetail extends React.Component {
             <p>Latest price: <span className="text-primary">${this.state.latestPrice.latestPrice}</span></p>
             <div className="row mt-2">
               <ButtonGroup>
-                <Button active onClick={()=>this.updateGraph("1d")} > 1D</Button>
                 <Button onClick={()=>this.updateGraph("1m")} > 1M</Button>
                 <Button onClick={()=>this.updateGraph("3m")} > 3M</Button>
                 <Button onClick={()=>this.updateGraph("6m")} > 6M</Button>
                 <Button onClick={()=>this.updateGraph("1y")} > 1Y</Button>
                 <Button onClick={()=>this.updateGraph("2y")} > 2Y</Button>
                 <Button onClick={()=>this.updateGraph("5y")} > 5Y</Button>
+                <Button onClick={()=>this.updateGraph("max")} > Max</Button>
               </ButtonGroup>
             </div>
             <div className="row" >

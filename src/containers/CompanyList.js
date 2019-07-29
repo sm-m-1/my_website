@@ -30,7 +30,7 @@ class StocksListContainer extends React.Component {
   // SERVER_BACKEND_API_URL = 'http://127.0.0.1:8000/projects/fortune_1000/companies/api/';
   SERVER_BACKEND_API_URL = 'https://smmashuq.com/projects/fortune_1000/companies/api/';
   SERVER_BACKEND_PAGE_SIZE = 0;
-  IEX_URL = "cloud.iexapis.com/stable/stock/market/batch?symbols=";
+  IEX_URL = "https://cloud.iexapis.com/stable/stock/market/batch?symbols=";
   IEX_TYPE = "&types=quote";
   TOKEN = "&token=pk_b1b20925e6fc4ba9bee7ba356f543220";
 
@@ -71,7 +71,7 @@ class StocksListContainer extends React.Component {
         var fullUrl = this.IEX_URL + companiesSymbols + this.IEX_TYPE + this.TOKEN;
         this.getStockPrices(fullUrl)
           .then(response => {
-            // console.log("response from iex api:", response);
+            console.log("response from iex api:", response);
 
             // console.log('latestPrices: ', JSON.stringify(latestPrices));
             for (i = 0; i < companiesList.length; i++) {
@@ -123,7 +123,7 @@ class StocksListContainer extends React.Component {
   }
 
   componentDidMount() {
-    this.forceUpdateInterval = setInterval(() => this.fetchStockData(this.SERVER_BACKEND_API_URL), 1000);
+    this.forceUpdateInterval = setInterval(() => this.fetchStockData(this.SERVER_BACKEND_API_URL), 3000);
     this.fetchStockData(this.SERVER_BACKEND_API_URL);
   }
 
@@ -132,7 +132,7 @@ class StocksListContainer extends React.Component {
     // console.log(query);
     clearInterval(this.forceUpdateInterval);
     var newAPIUrl = this.SERVER_BACKEND_API_URL+"?q="+query;
-    this.forceUpdateInterval = setInterval(() => this.fetchStockData(newAPIUrl), 1000);
+    this.forceUpdateInterval = setInterval(() => this.fetchStockData(newAPIUrl), 3000);
     this.fetchStockData(newAPIUrl);
   }
 
@@ -141,7 +141,7 @@ class StocksListContainer extends React.Component {
     // page will still get called every two seconds.
     clearInterval(this.forceUpdateInterval);
     var newAPIUrl = this.SERVER_BACKEND_API_URL+"?page="+pageNumber;
-    this.forceUpdateInterval = setInterval(() => this.fetchStockData(newAPIUrl), 1000);
+    this.forceUpdateInterval = setInterval(() => this.fetchStockData(newAPIUrl), 3000);
     this.fetchStockData(newAPIUrl);
   }
 

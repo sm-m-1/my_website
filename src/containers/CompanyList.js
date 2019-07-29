@@ -30,8 +30,9 @@ class StocksListContainer extends React.Component {
   // SERVER_BACKEND_API_URL = 'http://127.0.0.1:8000/projects/fortune_1000/companies/api/';
   SERVER_BACKEND_API_URL = 'https://smmashuq.com/projects/fortune_1000/companies/api/';
   SERVER_BACKEND_PAGE_SIZE = 0;
-  IEX_URL = "https://api.iextrading.com/1.0/stock/market/batch?symbols=";
+  IEX_URL = "cloud.iexapis.com/stable/stock/market/batch?symbols=";
   IEX_TYPE = "&types=quote";
+  TOKEN = "&token=pk_b1b20925e6fc4ba9bee7ba356f543220";
 
   getStockPrices = (url) => {
     // setInterval(() => this.forceUpdate(), 2000);
@@ -67,7 +68,7 @@ class StocksListContainer extends React.Component {
           companiesSymbols += companiesList[i].stock_symbol + ",";
         }
         // console.log("companiesSymbols: ", companiesSymbols);
-        var fullUrl = this.IEX_URL + companiesSymbols + this.IEX_TYPE;
+        var fullUrl = this.IEX_URL + companiesSymbols + this.IEX_TYPE + this.TOKEN;
         this.getStockPrices(fullUrl)
           .then(response => {
             // console.log("response from iex api:", response);

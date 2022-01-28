@@ -33,6 +33,7 @@ SECURE_SSL_REDIRECT = True
 
 ALLOWED_HOSTS = [
     'https://pacific-retreat-99874.herokuapp.com',
+    'https://sm-mashuque.herokuapp.com',
     'http://smmashuq.com',
     ''
 ]
@@ -189,9 +190,9 @@ STATICFILES_DIRS = [
 django_heroku.settings(locals())
 
 # add heroku production database credentials. dj_database_url
-prod_db_settings = dj_database_url.config(conn_max_age=600, ssl_require=True)
-DATABASES['default'].update(prod_db_settings)
-DATABASES['default']['ENGINE'] = 'django.db.backends.postgresql_psycopg2'
+# prod_db_settings = dj_database_url.config(conn_max_age=600, ssl_require=True)
+# DATABASES['default'].update(prod_db_settings)
+# DATABASES['default']['ENGINE'] = 'django.db.backends.postgresql_psycopg2'
 
 try:
     from .local_settings import *

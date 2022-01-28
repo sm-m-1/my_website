@@ -23,7 +23,7 @@ class CompanyDetail extends React.Component {
   TOKEN = "?token=pk_b1b20925e6fc4ba9bee7ba356f543220"
 
   // SERVER_BACKEND_API_URL = 'http://127.0.0.1:8000/projects/fortune_1000/companies/api/';
-  SERVER_BACKEND_API_URL = 'https://smmashuq.com/projects/fortune_1000/companies/api/';
+  SERVER_BACKEND_API_URL = 'https://sm-mashuque.herokuapp.com/projects/fortune_1000/companies/api/';
 
   componentDidMount() {
     const companySlug = this.props.match.params.companySlug;
@@ -118,7 +118,7 @@ class CompanyDetail extends React.Component {
     return (
       <div>
         <div className="container">
-          <Button type="primary" className="mb-2" href="https://smmashuq.com/projects/fortune_1000/companies/v2">
+          <Button type="primary" className="mb-2" href="https://sm-mashuque.herokuapp.com/projects/fortune_1000/companies/v2">
             App Home
           </Button>
           <Card title={this.state.company.name}>

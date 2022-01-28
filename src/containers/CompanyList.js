@@ -28,7 +28,7 @@ class StocksListContainer extends React.Component {
   }
 
   // SERVER_BACKEND_API_URL = 'http://127.0.0.1:8000/projects/fortune_1000/companies/api/';
-  SERVER_BACKEND_API_URL = 'https://smmashuq.com/projects/fortune_1000/companies/api/';
+  SERVER_BACKEND_API_URL = 'https://sm-mashuque.herokuapp.com/projects/fortune_1000/companies/api/';
   SERVER_BACKEND_PAGE_SIZE = 0;
   IEX_URL = "https://cloud.iexapis.com/stable/stock/market/batch?symbols=";
   IEX_TYPE = "&types=quote";

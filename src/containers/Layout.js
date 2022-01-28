@@ -10,7 +10,7 @@ const CustomLayout = (props) => {
       <div className="container-fluid bg-dark">
         <nav className="navbar navbar-expand-md navbar-dark bg-dark container">
 
-          <a className="navbar-brand" href="http://smmashuq.com/"> SM Mashuque <span className="sr-only">(current)</span></a>
+          <a className="navbar-brand" href="http://sm-mashuque.herokuapp.com/"> SM Mashuque <span className="sr-only">(current)</span></a>
           <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggler"
                   aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
@@ -19,10 +19,10 @@ const CustomLayout = (props) => {
           <div className="collapse navbar-collapse" id="navbarToggler">
             <ul className="navbar-nav ml-auto">
               <li className="nav-item">
-                <a className="nav-link" href="http://smmashuq.com/projects/">Projects</a>
+                <a className="nav-link" href="http://sm-mashuque.herokuapp.com/projects/">Projects</a>
               </li>
               <li className="nav-item">
-                <a className="nav-link" href="http://smmashuq.com/about/">About Me</a>
+                <a className="nav-link" href="http://sm-mashuque.herokuapp.com/about/">About Me</a>
               </li>
             </ul>
           </div>
